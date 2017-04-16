@@ -1,0 +1,28 @@
+/**
+ * 
+ */
+package main;
+
+/**
+ * @author Tomek
+ *
+ */
+abstract class Subject {
+
+	public void attach(Observer o) {
+		
+		
+	}
+	
+	public void detach(Observer o) {
+		
+		
+	}
+	
+	public void notifyObservers() {
+		
+		for (Observer o : Observers) {
+			o.update();
+		}
+	
+}

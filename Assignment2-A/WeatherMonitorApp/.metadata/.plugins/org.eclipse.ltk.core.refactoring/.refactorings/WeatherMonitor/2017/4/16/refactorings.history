@@ -1,0 +1,4 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<session version="1.0">
+<refactoring comment="Rename resource &apos;WeatherMonitor/src/main&apos; to &apos;mainn&apos;" description="Rename resource &apos;main&apos;" flags="7" id="org.eclipse.ltk.core.refactoring.rename.resource" input="src/main" name="mainn" stamp="1492330777483" updateReferences="true"/>
+</session>

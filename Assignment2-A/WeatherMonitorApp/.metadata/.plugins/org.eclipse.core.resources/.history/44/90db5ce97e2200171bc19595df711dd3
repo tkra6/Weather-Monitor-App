@@ -1,0 +1,19 @@
+/**
+ * 
+ */
+package main;
+
+/**
+ * @author Tomek
+ *
+ */
+class Weather {
+
+	/**
+	 * 
+	 */
+	public Weather() {
+		// TODO Auto-generated constructor stub
+	}
+
+}

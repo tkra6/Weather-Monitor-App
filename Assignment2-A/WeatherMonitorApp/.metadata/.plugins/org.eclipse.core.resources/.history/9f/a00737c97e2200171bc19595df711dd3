@@ -1,0 +1,9 @@
+ackage main;
+
+class Weather {
+
+	public Weather() {
+		// TODO Auto-generated constructor stub
+	}
+
+}

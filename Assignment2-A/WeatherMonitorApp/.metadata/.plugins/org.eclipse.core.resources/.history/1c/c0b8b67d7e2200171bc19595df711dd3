@@ -1,0 +1,17 @@
+/**
+ * 
+ */
+package main;
+
+/**
+ * @author Tomek
+ *
+ */
+class WeatherMonitor extends Observer {
+
+	@Override
+	public void update() {
+		
+	}
+
+}

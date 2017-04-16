@@ -1,0 +1,12 @@
+/**
+ * 
+ */
+package main;
+
+/**
+ * @author Tom
+ *
+ */
+class WeatherMonitor extends Observer {
+
+}

@@ -1,0 +1,16 @@
+/**
+ * 
+ */
+package main;
+
+/**
+ * @author Tomek
+ *
+ */
+
+
+public abstract class Observer {
+	
+	public abstract void update();
+
+}
