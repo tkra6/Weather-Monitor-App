@@ -3,8 +3,8 @@ package main;
 class TemperatureMonitor extends Observer {
 	
 	void temperatureMonitor(Subject subject){
-		this.subject = subject;
-	    this.subject.attach(this);
+		this.setSubject(subject);
+	    this.getSubject().attach(this);
 	}
 
 	@Override

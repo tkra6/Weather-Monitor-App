@@ -4,13 +4,25 @@
 package main;
 
 /**
- * @author Tom
+ * @author Tom, Doug
  *
  */
 
 abstract class Observer {
 	
-	Subject subject;
+	private Subject subject;
 	public abstract void update();
+	
+	public void setSubject(Subject subject) {
+		
+		this.subject = subject;
+		
+	}
+	
+	public Subject getSubject() {
+		
+		return this.subject;
+		
+	}
 
 }
