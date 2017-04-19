@@ -15,17 +15,38 @@ public class WeatherController {
 	 */
 	
 	public static void main(String[] args) throws Exception {
-		Weather weather = new Weather();
-		createWeatherGUI(weather.getLocations());
+		WeatherWebService webService = new MelbourneWeather2();
+		String[] locations = webService.getAllLocations();
+		String currLocation;
+		String[] currTemperature;
+		String[] currRainfall;
+		
+		
+		// Loop over the locations, and display the temperature and rainfall at each
+		for (int i = 0; i < 5; i++) {
+			String locationString = "";
+			currLocation = locations[i];
+			currTemperature = webService.getTemperatureForLocation(currLocation);
+			currRainfall = webService.getRainfallForLocation(currLocation);
+			
+			locationString += "Location: " + currLocation;
+			locationString += " Temperature: " + currTemperature[1];
+			locationString += " Rainfall: " + currRainfall[1];
+			
+			createWeatherGUI(locationString);
+			
+		}
+		
+//		createWeatherGUI(locationString);
 		
 	}
 	
-	// creates initial GUIframe with weather locations
-	static void createWeatherGUI(String[] locations) {
+	// creates initial GUIframe with content in it
+	static void createWeatherGUI(String content) {
 		SwingUtilities.invokeLater(new Runnable() {
             @Override
             public void run() {
-                new GUIController(locations);
+                new GUIController(content);
             }
         });	
 	}

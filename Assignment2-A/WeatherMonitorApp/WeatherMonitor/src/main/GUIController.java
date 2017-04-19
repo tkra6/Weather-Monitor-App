@@ -18,9 +18,10 @@ import javax.swing.*;
  */
 public class GUIController {
 
-	String[] wlocations;
-    public GUIController(String[] locations) {
-	    wlocations = locations;
+	String content;
+	
+    public GUIController(String content) {
+	    this.content = content;
         createAndShowUI();
     }
 
@@ -40,12 +41,9 @@ public class GUIController {
 
         final JPanel panel = new JPanel();
         panel.setBackground(Color.LIGHT_GRAY);
-        
-		for (int i = 0; i < wlocations.length; i++) {
-        
-        JLabel _lbl = new JLabel(wlocations[i].toString());//make label and assign text in 1 line
+            
+        JLabel _lbl = new JLabel(this.content);//make label and assign text in 1 line
         panel.add(_lbl);
-		}
 //
 //        JButton button = new JButton("Add label");
 //
