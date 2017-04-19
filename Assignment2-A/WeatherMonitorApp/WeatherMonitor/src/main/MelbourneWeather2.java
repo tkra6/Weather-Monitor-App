@@ -9,23 +9,28 @@ import melbourneweather2.MelbourneWeather2Stub;
 import melbourneweather2.MelbourneWeather2Stub.*;
 
 public class MelbourneWeather2 extends WeatherWebService {
-
-	@Override
-	public String[] getAllLocations() {
-		MelbourneWeather2Stub MelbourneWeatherService;
+	
+	private MelbourneWeather2Stub MelbourneWeatherService;
+	
+	public MelbourneWeather2() {
+		
 		try {
 			MelbourneWeatherService = new MelbourneWeather2Stub();
 		} catch (AxisFault e) {
 			// TODO Auto-generated catch block
 			// Add code for if the weather service cannot be instantiated
 			e.printStackTrace();
-			return null;
 		}
+		
+	}
+	
+	@Override
+	public String[] getAllLocations() {
 		
 		GetLocationsResponse LocationsResponse;
 		
 		try {
-			LocationsResponse = MelbourneWeatherService.getLocations();
+			LocationsResponse = this.MelbourneWeatherService.getLocations();
 		} catch (RemoteException | ExceptionException e) {
 			// TODO Auto-generated catch block
 			// Add code for handling if the location cannot be found
@@ -39,14 +44,35 @@ public class MelbourneWeather2 extends WeatherWebService {
 
 	@Override
 	public String[] getRainfallForLocation(String location) {
-		// TODO Auto-generated method stub
-		return null;
+		/// Get rainfall
+		GetRainfall RainfallRequest = new GetRainfall();
+		RainfallRequest.setLocation(location);
+		GetRainfallResponse RainfallResponse;
+		try {
+			RainfallResponse = this.MelbourneWeatherService.getRainfall(RainfallRequest);
+		} catch (RemoteException | ExceptionException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			return null;
+		}
+		String[] rainfall = RainfallResponse.get_return();
+		return rainfall;
 	}
 
 	@Override
 	public String[] getTemperatureForLocation(String location) {
-		// TODO Auto-generated method stub
-		return null;
+		GetTemperature TemperatureRequest = new GetTemperature();
+		TemperatureRequest.setLocation(location);
+		GetTemperatureResponse TemperatureResponse;
+		try {
+			TemperatureResponse = this.MelbourneWeatherService.getTemperature(TemperatureRequest);
+		} catch (RemoteException | ExceptionException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			return null;
+		}
+		String[] temperature = TemperatureResponse.get_return();
+		return temperature;
 	}
 
 }
