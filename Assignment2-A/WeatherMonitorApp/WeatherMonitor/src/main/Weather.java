@@ -4,8 +4,7 @@
 package main;
 import java.lang.Exception;
 
-import melbourneweather2.MelbourneWeather2Stub;
-import melbourneweather2.MelbourneWeather2Stub.*;
+import main.WeatherWebService;
 
 /**
  * @author Tom
@@ -13,20 +12,20 @@ import melbourneweather2.MelbourneWeather2Stub.*;
  */
 class Weather extends Subject {
 
-	private String[] locations;
+	private String location;
+	private WeatherWebService webService;
 	private int state;
 	
-	public Weather() throws Exception{
-		final MelbourneWeather2Stub MelbourneWeatherService = new MelbourneWeather2Stub();
-		GetLocationsResponse LocationsResponse = MelbourneWeatherService.getLocations();
-		locations = LocationsResponse.get_return();
+	public Weather(String location, WeatherWebService webService) throws Exception {
+		this.location = location;
+		this.webService = webService;
 	}
 
-	public String[] getLocations() {
-		return locations;
+	public String getLocation() {
+		return this.location;
 	}
 	
 	public int getState() {
-	      return state;
-	   }
+      return state;
+	}
 }
