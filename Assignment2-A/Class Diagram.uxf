@@ -4,8 +4,8 @@
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>170</x>
-      <y>260</y>
+      <x>220</x>
+      <y>320</y>
       <w>140</w>
       <h>90</h>
     </coordinates>
@@ -20,8 +20,8 @@ SubjectState</panel_attributes>
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>170</x>
-      <y>110</y>
+      <x>220</x>
+      <y>170</y>
       <w>140</w>
       <h>80</h>
     </coordinates>
@@ -36,8 +36,8 @@ Notify()
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>460</x>
-      <y>110</y>
+      <x>510</x>
+      <y>170</y>
       <w>140</w>
       <h>60</h>
     </coordinates>
@@ -49,8 +49,8 @@ Update()</panel_attributes>
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>460</x>
-      <y>260</y>
+      <x>510</x>
+      <y>320</y>
       <w>140</w>
       <h>90</h>
     </coordinates>
@@ -64,8 +64,8 @@ ObserverState</panel_attributes>
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>770</x>
-      <y>280</y>
+      <x>820</x>
+      <y>340</y>
       <w>170</w>
       <h>160</h>
     </coordinates>
@@ -86,8 +86,8 @@ ObserverState</panel_attributes>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>230</x>
-      <y>180</y>
+      <x>280</x>
+      <y>240</y>
       <w>30</w>
       <h>100</h>
     </coordinates>
@@ -97,8 +97,8 @@ ObserverState</panel_attributes>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>520</x>
-      <y>160</y>
+      <x>570</x>
+      <y>220</y>
       <w>30</w>
       <h>120</h>
     </coordinates>
@@ -108,8 +108,8 @@ ObserverState</panel_attributes>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>300</x>
-      <y>130</y>
+      <x>350</x>
+      <y>190</y>
       <w>180</w>
       <h>30</h>
     </coordinates>
@@ -119,8 +119,8 @@ ObserverState</panel_attributes>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>300</x>
-      <y>300</y>
+      <x>350</x>
+      <y>360</y>
       <w>180</w>
       <h>30</h>
     </coordinates>
@@ -130,8 +130,8 @@ ObserverState</panel_attributes>
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>480</x>
-      <y>460</y>
+      <x>530</x>
+      <y>520</y>
       <w>150</w>
       <h>110</h>
     </coordinates>
@@ -148,8 +148,8 @@ destroyMonitor()
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>150</x>
-      <y>630</y>
+      <x>200</x>
+      <y>690</y>
       <w>170</w>
       <h>30</h>
     </coordinates>
@@ -159,8 +159,8 @@ destroyMonitor()
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>150</x>
-      <y>530</y>
+      <x>200</x>
+      <y>590</y>
       <w>170</w>
       <h>30</h>
     </coordinates>
@@ -170,19 +170,8 @@ destroyMonitor()
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>220</x>
-      <y>550</y>
-      <w>30</w>
-      <h>100</h>
-    </coordinates>
-    <panel_attributes>lt=&lt;-</panel_attributes>
-    <additional_attributes>10.0;80.0;10.0;10.0</additional_attributes>
-  </element>
-  <element>
-    <id>Relation</id>
-    <coordinates>
-      <x>220</x>
-      <y>340</y>
+      <x>270</x>
+      <y>400</y>
       <w>30</w>
       <h>210</h>
     </coordinates>
@@ -192,8 +181,8 @@ destroyMonitor()
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>590</x>
-      <y>300</y>
+      <x>640</x>
+      <y>360</y>
       <w>200</w>
       <h>30</h>
     </coordinates>
@@ -203,8 +192,8 @@ destroyMonitor()
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>620</x>
-      <y>430</y>
+      <x>670</x>
+      <y>490</y>
       <w>230</w>
       <h>110</h>
     </coordinates>
@@ -214,8 +203,8 @@ destroyMonitor()
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>300</x>
-      <y>340</y>
+      <x>350</x>
+      <y>400</y>
       <w>200</w>
       <h>140</h>
     </coordinates>
@@ -225,8 +214,8 @@ destroyMonitor()
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>520</x>
-      <y>340</y>
+      <x>570</x>
+      <y>400</y>
       <w>30</w>
       <h>140</h>
     </coordinates>
@@ -236,8 +225,8 @@ destroyMonitor()
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>310</x>
-      <y>530</y>
+      <x>360</x>
+      <y>590</y>
       <w>190</w>
       <h>30</h>
     </coordinates>
@@ -247,8 +236,8 @@ destroyMonitor()
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>1010</x>
-      <y>130</y>
+      <x>1060</x>
+      <y>190</y>
       <w>100</w>
       <h>30</h>
     </coordinates>
@@ -258,12 +247,45 @@ destroyMonitor()
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>930</x>
-      <y>150</y>
+      <x>980</x>
+      <y>210</y>
       <w>140</w>
       <h>150</h>
     </coordinates>
     <panel_attributes>lt=&lt;-</panel_attributes>
     <additional_attributes>120.0;10.0;10.0;130.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>270</x>
+      <y>610</y>
+      <w>30</w>
+      <h>100</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;-</panel_attributes>
+    <additional_attributes>10.0;10.0;10.0;80.0</additional_attributes>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>390</x>
+      <y>790</y>
+      <w>270</w>
+      <h>30</h>
+    </coordinates>
+    <panel_attributes>MelbourneWeather2 package</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>360</x>
+      <y>710</y>
+      <w>50</w>
+      <h>100</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;-</panel_attributes>
+    <additional_attributes>30.0;80.0;10.0;10.0</additional_attributes>
   </element>
 </diagram>
