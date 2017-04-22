@@ -7,16 +7,17 @@ import java.lang.Exception;
 import main.WeatherWebService;
 
 /**
- * @author Tom
- *
+ * @author Tom, Doug
+ * Represents the weather of a single location
  */
 class Weather extends Subject {
 
-	private String location;
 	private WeatherWebService webService;
-	private int state;
+	private String location;
+	private String temperature;
+	private String rainfall;
 	
-	public Weather(String location, WeatherWebService webService) throws Exception {
+	public Weather(String location, WeatherWebService webService) {
 		this.location = location;
 		this.webService = webService;
 	}
@@ -25,7 +26,15 @@ class Weather extends Subject {
 		return this.location;
 	}
 	
-	public int getState() {
-      return state;
+	public String[] getState() {
+		return new String[] {temperature, rainfall};
+	}
+	
+	public void setState() {
+		
+		this.temperature = this.webService.getTemperatureForLocation(this.location);
+		this.rainfall = this.webService.getRainfallForLocation(this.location);
+		this.notifyObservers();
+		
 	}
 }

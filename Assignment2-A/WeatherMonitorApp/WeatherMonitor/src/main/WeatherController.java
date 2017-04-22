@@ -17,23 +17,16 @@ public class WeatherController {
 	public static void main(String[] args) throws Exception {
 		WeatherWebService webService = new MelbourneWeather2();
 		String[] locations = webService.getAllLocations();
-		String currLocation;
-		String[] currTemperature;
-		String[] currRainfall;
 		
 		
-		// Loop over the locations, and display the temperature and rainfall at each
+		// Loop over the locations, and display the temperature at each in a separate window
 		for (int i = 0; i < 5; i++) {
-			String locationString = "";
-			currLocation = locations[i];
-			currTemperature = webService.getTemperatureForLocation(currLocation);
-			currRainfall = webService.getRainfallForLocation(currLocation);
 			
-			locationString += "Location: " + currLocation;
-			locationString += " Temperature: " + currTemperature[1];
-			locationString += " Rainfall: " + currRainfall[1];
+			Weather weather = new Weather(locations[i], webService);
+			weather.setState();
+			TemperatureMonitor tempMonitor = new TemperatureMonitor(weather);
 			
-			createWeatherGUI(locationString);
+			createWeatherGUI(tempMonitor.getRenderString());
 			
 		}
 		
