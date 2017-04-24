@@ -35,7 +35,9 @@ class TemperatureMonitor extends Observer {
 	}
 	
 	public String getRenderString() {
+		
 		return "The temperature at " + this.getLocation() + " is currently " + this.getTemperature();
+		
 	}
 
 }

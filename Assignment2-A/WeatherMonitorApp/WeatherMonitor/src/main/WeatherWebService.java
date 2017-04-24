@@ -1,8 +1,7 @@
 package main;
 
 /*
- * abstract class WeatherWebService
- * Provides an interface for concrete implementations of a weather service
+ * @desc: Provides an interface for concrete implementations of a weather service
  * @author: Douglas Rintoul
  */
 
