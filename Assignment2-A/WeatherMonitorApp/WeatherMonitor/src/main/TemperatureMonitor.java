@@ -1,6 +1,6 @@
 package main;
 
-class TemperatureMonitor extends Observer {
+class TemperatureMonitor extends WeatherMonitor {
 	
 	private String temperature;
 	
@@ -38,6 +38,12 @@ class TemperatureMonitor extends Observer {
 		
 		return "The temperature at " + this.getLocation() + " is currently " + this.getTemperature();
 		
+	}
+
+	@Override
+	public String[] getRenderContent() {
+		// TODO Auto-generated method stub
+		return new String[]{"The temperature at " + this.getLocation() + " is currently " + this.getTemperature()};
 	}
 
 }
