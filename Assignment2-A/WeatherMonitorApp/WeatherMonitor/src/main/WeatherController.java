@@ -71,6 +71,20 @@ public class WeatherController {
 		
 	}
 	
+	private static void UpdateAllWeatherData(HashMap<String, Weather> locationWeather) {
+		
+		Iterator<Entry<String, Weather>> it = locationWeather.entrySet().iterator();
+		
+		while (it.hasNext()) {
+			
+			Entry<String, Weather> entry = it.next();
+			
+			entry.getValue().setState();
+			
+		}
+		
+	}
+	
 	// creates initial GUIframe with content in it
 	static void createWeatherGUI(String content) {
 		SwingUtilities.invokeLater(new Runnable() {
