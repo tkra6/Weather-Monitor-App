@@ -21,4 +21,5 @@ abstract class WeatherData {
 		
 		return this.data;
 		
+	}
 }
