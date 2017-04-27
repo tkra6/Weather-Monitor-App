@@ -11,7 +11,7 @@ import java.util.HashSet;
  */
 abstract class Subject {
 
-	HashSet<Observer> observers = new HashSet<Observer>();
+	protected HashSet<Observer> observers = new HashSet<Observer>();
 	
 	public void attach(Observer o) {
 		observers.add(o);
@@ -26,4 +26,5 @@ abstract class Subject {
 	         observer.update();
          }
 	}
+	
 }

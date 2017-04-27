@@ -23,7 +23,79 @@ class Location extends Subject {
 		this.location = location;
 		this.webService = webService;
 	}
-
+	
+	@Override
+	public void attach(Observer o) {
+		// TODO: Find a better way of doing this
+		this.observers.add(o);
+		
+		if (o instanceof TemperatureMonitor || o instanceof TemperatureRainfallMonitor) {
+			
+			// If the Location object isn't already tracking temperature, add it to the HashMap
+			if (!weatherData.containsKey(DataType.temperature)) {
+				
+				weatherData.put(DataType.temperature, new TemperatureData(null));
+				
+			}
+			
+		} 
+		
+		if (o instanceof RainfallMonitor || o instanceof TemperatureRainfallMonitor) {
+			
+			// If the Location object isn't already tracking rainfall, add it to the HashMap
+			if (!weatherData.containsKey(DataType.rainfall)) {
+				
+				weatherData.put(DataType.rainfall, new TemperatureData(null));
+				
+			}
+			
+		}
+		
+	}
+	
+	@Override
+	public void detach(Observer o) {
+		
+		observers.remove(o);
+		
+		Iterator<Observer> it = observers.iterator();
+		
+		boolean temperature = false;
+		boolean rainfall = false;
+		
+		Observer ob;
+		
+		while (it.hasNext()) {
+			
+			ob = it.next();
+			
+			if (ob instanceof TemperatureMonitor || ob instanceof TemperatureRainfallMonitor) {
+				
+				temperature = true;
+				
+			}
+			
+			if (ob instanceof RainfallMonitor || ob instanceof TemperatureRainfallMonitor) {
+				
+				rainfall = true;
+				
+			}
+			
+			if (temperature && rainfall) {
+				break;
+			}
+			
+		}
+		
+		if (!temperature) {
+			this.weatherData.put(DataType.temperature, null);
+		}
+		if (!rainfall) {
+			this.weatherData.put(DataType.rainfall, null);
+		}
+		
+	}
+	
 	public String getLocation() {
 		return this.location;
 	}
@@ -36,6 +108,7 @@ class Location extends Subject {
 	public String getState(DataType type) {
 		
 		return this.weatherData.get(type).getData();
+		
 	}
 	
 	
@@ -52,13 +125,16 @@ class Location extends Subject {
 			
 			Entry<DataType, WeatherData> entry = it.next();
 			
-			switch (entry.getKey())
-			{
-			case temperature: entry.getValue().setData(this.webService.getTemperatureForLocation(this.location));
-			break;
-				
-			case rainfall:	entry.getValue().setData(this.webService.getRainfallForLocation(this.location));
-			break;
+			// If the WeatherData object isn't null
+			if (entry.getValue() != null) {
+			
+				switch (entry.getKey()) {
+				case temperature: entry.getValue().setData(this.webService.getTemperatureForLocation(this.location));
+				break;
+					
+				case rainfall:	entry.getValue().setData(this.webService.getRainfallForLocation(this.location));
+				break;
+				}
 			}
 		}
 	}

@@ -11,8 +11,6 @@ class RainfallMonitor extends Observer {
 	
 	private Location subject;
 	private String rainfall;
-	
-	
 
 	public RainfallMonitor(Location subject) {
 		
