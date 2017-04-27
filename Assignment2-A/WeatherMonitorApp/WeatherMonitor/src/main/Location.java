@@ -22,6 +22,7 @@ class Location extends Subject {
 	public Location(String location, WeatherWebService webService) {
 		this.location = location;
 		this.webService = webService;
+		this.weatherData = new HashMap<DataType, WeatherData>();
 	}
 	
 	@Override

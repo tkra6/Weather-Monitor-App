@@ -50,7 +50,10 @@ public class LocationList {
 		
 		for (Location location : this.locationMap.values()) {
 			
-			location.setState();
+			if (location != null) {
+				System.out.println("Updating " + location);
+				location.setState();
+			}
 			
 		}
 		

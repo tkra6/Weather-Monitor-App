@@ -7,6 +7,8 @@ import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.GridLayout;
 import java.awt.event.*;
+import java.util.TimerTask;
+import java.util.Timer;
 
 import javax.swing.*;
 
@@ -28,6 +30,19 @@ public class WeatherController {
 		LocationList locationList = constructLocationList(webService);
 		
 		JFrame window = createAndShowUI();
+		
+		locationList.addLocation(new Location("Cranbourne", webService));
+		locationList.addLocation(new Location("Rhyll", webService));
+		
+		Timer timer = new Timer();
+		TimerTask updateTask = new TimerTask() {
+		    @Override
+		    public void run () {
+		        locationList.updateAllLocations();
+		    }
+		};
+		// schedule the task to run starting now and then every minutes
+		timer.schedule(updateTask, 0l, 1000*60*5);
 		
 	}
 	
