@@ -1,0 +1,155 @@
+/**
+ * 
+ */
+package main;
+
+import java.awt.BorderLayout;
+import java.awt.Color;
+import java.awt.Dimension;
+import java.awt.GridLayout;
+import java.awt.event.*;
+import java.util.TimerTask;
+import java.util.Timer;
+import java.awt.*;
+
+import javax.swing.*;
+import javax.swing.event.ListSelectionEvent;
+import javax.swing.event.ListSelectionListener;
+/**
+ * @author Tom, Doug
+ *
+ */
+public class WeatherController {
+	/**
+	 * @param args
+	 */
+	
+	static String selectedLocation;
+		
+	public static void main(String[] args) throws Exception {
+		
+	   
+		
+		// Create the WeatherWebService object
+		WeatherWebService webService = new MelbourneWeather2();
+		
+		// Create a LocationList object that contains keys for each of the locations (all objects defaulted to null)
+		LocationList locationList = constructLocationList(webService);
+		
+		JFrame window = createAndShowUI();
+		
+		locationList.addLocation(new Location("Cranbourne", webService));
+		locationList.addLocation(new Location("Rhyll", webService));
+		
+		//TODO get string of locations from LocationList.java instead
+		 String[] locations = webService.getAllLocations();
+
+		    JFrame f = new JFrame();
+		    f.setLayout(new GridLayout(1, 1));
+		    f.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		    
+		    JPanel panel = new JPanel();
+		    panel.setLayout(new FlowLayout());
+		    
+		    JButton temperatureButton = new JButton("Temperature");        
+		    JButton javaButton = new JButton("Submit");
+
+		    final JList list= new JList(locations);
+		    list.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
+		    
+		    
+		    list.addListSelectionListener(new ListSelectionListener() {
+		      public void valueChanged(ListSelectionEvent e) {
+		        if (!e.getValueIsAdjusting()) {
+		          selectedLocation = (String) list.getSelectedValue();
+		        }
+		      }
+		    });
+		    
+		    temperatureButton.addActionListener(new ActionListener() {
+		         public void actionPerformed(ActionEvent e) {
+		        	 System.out.println(selectedLocation);
+		         }
+		      });
+		    
+		    
+		    panel.add(new JScrollPane(list));
+		    panel.add(temperatureButton, BorderLayout.SOUTH);
+		    panel.add(javaButton, BorderLayout.SOUTH);
+		    f.add(panel);
+		    f.pack();
+		    f.setLocationRelativeTo(null);
+		    f.setVisible(true);
+		
+		Timer timer = new Timer();
+		TimerTask updateTask = new TimerTask() {
+		    @Override
+		    public void run () {
+		        locationList.updateAllLocations();
+		    }
+		};
+		// schedule the task to run starting now and then every minutes
+		timer.schedule(updateTask, 0l, 1000*60*5);
+		
+		
+		
+		
+		
+	}
+	
+	private static LocationList constructLocationList(WeatherWebService webService) {
+		
+		String[] locations = webService.getAllLocations();
+		return new LocationList(locations);
+		
+	}
+	
+	private static JFrame createAndShowUI() {
+        JFrame frame = new JFrame("Melbourne Weather Application");
+        frame.setLayout(new GridLayout(0, 2));
+        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+
+        initComponents(frame);
+
+        frame.setResizable(false);
+        frame.pack();
+        frame.setVisible(true);
+        
+        return frame;
+    }
+	
+	private static JFrame createAndShowUI2() {
+
+
+    private static void initComponents(final JFrame frame) {
+
+        final JPanel panel = new JPanel();
+        panel.setBackground(Color.LIGHT_GRAY);
+            
+        JLabel _lbl = new JLabel("Testing");//make label and assign text in 1 line
+        panel.add(_lbl);
+
+        JButton button = new JButton("Add label");
+     
+
+
+
+        button.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                JLabel _lbl = new JLabel("Label ");//make label and assign text in 1 line
+
+                panel.add(_lbl);//add label we made
+
+                panel.revalidate();
+                panel.repaint();
+
+                frame.pack();//so our frame resizes to compensate for new components
+
+            }
+        });
+
+        frame.add(panel, BorderLayout.CENTER);
+        frame.add(button, BorderLayout.SOUTH);
+    }
+
+}
