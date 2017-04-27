@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<diagram program="umlet" version="13.2">
+<diagram program="umlet" version="14.2">
   <zoom_level>7</zoom_level>
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>273</x>
-      <y>77</y>
+      <x>329</x>
+      <y>105</y>
       <w>182</w>
       <h>77</h>
     </coordinates>
@@ -21,8 +21,8 @@
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>238</x>
-      <y>203</y>
+      <x>294</x>
+      <y>231</y>
       <w>252</w>
       <h>105</h>
     </coordinates>
@@ -43,8 +43,8 @@
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>357</x>
-      <y>147</y>
+      <x>413</x>
+      <y>175</y>
       <w>21</w>
       <h>70</h>
     </coordinates>
@@ -54,8 +54,8 @@
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>63</x>
-      <y>210</y>
+      <x>119</x>
+      <y>238</y>
       <w>98</w>
       <h>63</h>
     </coordinates>
@@ -70,8 +70,8 @@
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>0</x>
-      <y>315</y>
+      <x>56</x>
+      <y>343</y>
       <w>105</w>
       <h>21</h>
     </coordinates>
@@ -81,8 +81,8 @@
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>126</x>
-      <y>315</y>
+      <x>182</x>
+      <y>343</y>
       <w>105</w>
       <h>21</h>
     </coordinates>
@@ -92,8 +92,8 @@
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>42</x>
-      <y>266</y>
+      <x>98</x>
+      <y>294</y>
       <w>84</w>
       <h>63</h>
     </coordinates>
@@ -103,8 +103,8 @@
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>105</x>
-      <y>266</y>
+      <x>161</x>
+      <y>294</y>
       <w>84</w>
       <h>63</h>
     </coordinates>
@@ -114,8 +114,8 @@
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>154</x>
-      <y>238</y>
+      <x>210</x>
+      <y>266</y>
       <w>98</w>
       <h>21</h>
     </coordinates>
@@ -125,8 +125,8 @@
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>756</x>
-      <y>105</y>
+      <x>812</x>
+      <y>133</y>
       <w>84</w>
       <h>35</h>
     </coordinates>
@@ -138,8 +138,8 @@
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>546</x>
-      <y>217</y>
+      <x>602</x>
+      <y>245</y>
       <w>154</w>
       <h>84</h>
     </coordinates>
@@ -158,8 +158,8 @@
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>721</x>
-      <y>217</y>
+      <x>777</x>
+      <y>245</y>
       <w>154</w>
       <h>84</h>
     </coordinates>
@@ -178,8 +178,8 @@
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>896</x>
-      <y>217</y>
+      <x>952</x>
+      <y>245</y>
       <w>154</w>
       <h>91</h>
     </coordinates>
@@ -199,8 +199,8 @@
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>448</x>
-      <y>112</y>
+      <x>504</x>
+      <y>140</y>
       <w>322</w>
       <h>21</h>
     </coordinates>
@@ -210,8 +210,8 @@
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>791</x>
-      <y>133</y>
+      <x>847</x>
+      <y>161</y>
       <w>21</w>
       <h>98</h>
     </coordinates>
@@ -221,8 +221,8 @@
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>609</x>
-      <y>133</y>
+      <x>665</x>
+      <y>161</y>
       <w>203</w>
       <h>98</h>
     </coordinates>
@@ -232,8 +232,8 @@
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>791</x>
-      <y>133</y>
+      <x>847</x>
+      <y>161</y>
       <w>196</w>
       <h>98</h>
     </coordinates>
@@ -243,8 +243,8 @@
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>266</x>
-      <y>434</y>
+      <x>322</x>
+      <y>462</y>
       <w>196</w>
       <h>63</h>
     </coordinates>
@@ -260,8 +260,8 @@
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>350</x>
-      <y>301</y>
+      <x>406</x>
+      <y>329</y>
       <w>21</w>
       <h>147</h>
     </coordinates>
@@ -271,38 +271,39 @@
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>609</x>
-      <y>343</y>
-      <w>266</w>
+      <x>735</x>
+      <y>371</y>
+      <w>133</w>
       <h>56</h>
     </coordinates>
     <panel_attributes>WeatherController
 --
 - main()
-- updateAllLocations(HashMap&lt;String, Location&gt;)
 - constructLocationMap()</panel_attributes>
     <additional_attributes/>
   </element>
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>665</x>
-      <y>434</y>
+      <x>721</x>
+      <y>462</y>
       <w>161</w>
-      <h>56</h>
+      <h>84</h>
     </coordinates>
-    <panel_attributes>LocationUpdater
+    <panel_attributes>LocationList
 --
 - HashMap&lt;String, Location&gt;
 --
-+ run()</panel_attributes>
++ addLocation(Location)
++ removeLocation(Location)
++ updateAllLocations()</panel_attributes>
     <additional_attributes/>
   </element>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>434</x>
-      <y>301</y>
+      <x>490</x>
+      <y>329</y>
       <w>245</w>
       <h>175</h>
     </coordinates>
@@ -312,8 +313,8 @@
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>735</x>
-      <y>392</y>
+      <x>791</x>
+      <y>420</y>
       <w>21</w>
       <h>56</h>
     </coordinates>
@@ -323,23 +324,23 @@
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>483</x>
-      <y>287</y>
-      <w>140</w>
+      <x>539</x>
+      <y>315</y>
+      <w>210</w>
       <h>98</h>
     </coordinates>
     <panel_attributes>lt=&lt;-</panel_attributes>
-    <additional_attributes>10.0;10.0;180.0;120.0</additional_attributes>
+    <additional_attributes>10.0;10.0;280.0;120.0</additional_attributes>
   </element>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>455</x>
-      <y>392</y>
-      <w>168</w>
+      <x>511</x>
+      <y>420</y>
+      <w>238</w>
       <h>84</h>
     </coordinates>
     <panel_attributes>lt=&lt;-</panel_attributes>
-    <additional_attributes>10.0;100.0;220.0;10.0</additional_attributes>
+    <additional_attributes>10.0;100.0;320.0;10.0</additional_attributes>
   </element>
 </diagram>
