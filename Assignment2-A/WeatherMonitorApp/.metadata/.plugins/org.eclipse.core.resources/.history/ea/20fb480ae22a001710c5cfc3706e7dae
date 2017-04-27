@@ -1,0 +1,14 @@
+/**
+ * 
+ */
+package main;
+
+/**
+ * @author Tom, Doug
+ *
+ */
+abstract class WeatherData {
+	
+	
+
+}

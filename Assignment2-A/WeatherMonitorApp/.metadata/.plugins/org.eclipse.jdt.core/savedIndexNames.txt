@@ -16,9 +16,9 @@ INDEX VERSION 1.130+C:\Users\Tomek\EclipseWorkspace\FIT3077Assignment2\redtiger-
 3339317110.index
 681444432.index
 2660963750.index
-2952508653.index
-4159458785.index
 3957165393.index
+4159458785.index
+2952508653.index
 1757400737.index
 3350521806.index
 3721099253.index
@@ -33,8 +33,8 @@ INDEX VERSION 1.130+C:\Users\Tomek\EclipseWorkspace\FIT3077Assignment2\redtiger-
 2375696749.index
 3764404749.index
 2261558828.index
-83085761.index
 270524952.index
+83085761.index
 1507339265.index
 1651349548.index
 2677421846.index
@@ -57,12 +57,12 @@ INDEX VERSION 1.130+C:\Users\Tomek\EclipseWorkspace\FIT3077Assignment2\redtiger-
 4043846984.index
 771856041.index
 448998303.index
-531063457.index
 619531865.index
+531063457.index
 2517321354.index
 3326272024.index
-47423239.index
 3930511455.index
+47423239.index
 2306610914.index
 4142306923.index
 748787725.index

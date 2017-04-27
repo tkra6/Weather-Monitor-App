@@ -1,0 +1,41 @@
+/**
+ * 
+ */
+package main;
+import java.lang.Exception;
+import java.util.HashMap;
+
+import main.WeatherWebService;
+
+/**
+ * @author Tom, Doug
+ * Represents the weather of a single location
+ */
+class Location extends Subject {
+
+	private WeatherWebService webService;
+	private String location;
+	private HashMap <String, WeatherData> weatherData;
+	
+	public Location(String location, WeatherWebService webService) {
+		this.location = location;
+		this.webService = webService;
+	}
+
+	public String getLocation() {
+		return this.location;
+	}
+	
+	public HashMap getState() {
+		return weatherData;
+	}
+	
+	public void setState() {
+		
+		this.temperature = this.webService.getTemperatureForLocation(this.location);
+		this.rainfall = this.webService.getRainfallForLocation(this.location);
+		this.notifyObservers();
+		
+	}
+}
+

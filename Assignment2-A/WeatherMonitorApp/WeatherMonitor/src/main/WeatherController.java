@@ -24,8 +24,8 @@ public class WeatherController {
 	public static void main(String[] args) throws Exception {
 		// Create the WeatherWebService object
 		WeatherWebService webService = new MelbourneWeather2();
-		// Create a HashMap that maps locations to weather objects and populate it with all existing locations
-		HashMap<String, Weather> locationWeather = createWeatherHashMap(webService);
+		// Create a HashMap that maps locations to weather objects and sets locations to null
+		HashMap<String, Location> locationWeather = createWeatherHashMap(webService);
 		
 		Iterator<String> it = locationWeather.keySet().iterator();
 		
@@ -36,34 +36,32 @@ public class WeatherController {
 			
 		}
 		
-		System.out.println("Input a location name: ");
-		Scanner scanner = new Scanner(System.in);
-		String input = scanner.nextLine();
-		scanner.close();
-		
-		if (locationWeather.get(input) != null) {
-			
-			TemperatureMonitor monitor = new TemperatureMonitor(locationWeather.get(input));
-			createWeatherGUI(monitor.getRenderString());
-			
-		} else {
-			
-			System.out.println(input + " is not a valid location.");
-			
-		}
-		
+//		System.out.println("Input a location name: ");
+//		Scanner scanner = new Scanner(System.in);
+//		String input = scanner.nextLine();
+//		scanner.close();
+//		
+//		if (locationWeather.get(input) != null) {
+//			
+//			TemperatureMonitor monitor = new TemperatureMonitor(locationWeather.get(input));
+//			createWeatherGUI(monitor.getRenderString());
+//			
+//		} else {
+//			
+//			System.out.println(input + " is not a valid location.");
+//			
+//		}
+//		
 	}
 	
-	private static HashMap<String, Weather> createWeatherHashMap(WeatherWebService webService) {
+	private static HashMap<String, Location> createWeatherHashMap(WeatherWebService webService) {
 		
 		String[] locations = webService.getAllLocations();
-		HashMap<String, Weather> locationWeather = new HashMap<String, Weather>();
+		HashMap<String, Location> locationWeather = new HashMap<String, Location>();
 		
 		for (String location : locations) {
 			
-			Weather weather = new Weather(location, webService);
-			weather.setState();
-			locationWeather.put(location, weather);
+			locationWeather.put(location, null);
 			
 		}
 		
@@ -71,13 +69,13 @@ public class WeatherController {
 		
 	}
 	
-	private static void UpdateAllWeatherData(HashMap<String, Weather> locationWeather) {
+	private static void UpdateAllWeatherData(HashMap<String, Location> locationLocation) {
 		
-		Iterator<Entry<String, Weather>> it = locationWeather.entrySet().iterator();
+		Iterator<Entry<String, Location>> it = locationLocation.entrySet().iterator();
 		
 		while (it.hasNext()) {
 			
-			Entry<String, Weather> entry = it.next();
+			Entry<String, Location> entry = it.next();
 			
 			entry.getValue().setState();
 			

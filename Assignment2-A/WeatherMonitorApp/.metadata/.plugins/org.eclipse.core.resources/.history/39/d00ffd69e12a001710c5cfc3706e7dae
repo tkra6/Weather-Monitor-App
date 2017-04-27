@@ -1,0 +1,12 @@
+/**
+ * 
+ */
+package main;
+
+/**
+ * @author Tomek
+ *
+ */
+abstract class WeatherData {
+
+}

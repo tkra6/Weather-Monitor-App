@@ -2,6 +2,11 @@ package main;
 
 import javax.swing.SwingUtilities;
 
+/**
+ * @desc ***************************NO LONGER USED*************************
+ * @author Tom, Doug
+ *
+ */
 public abstract class WeatherMonitor extends Observer {
 	
 	MonitorWindow window;
@@ -11,7 +16,7 @@ public abstract class WeatherMonitor extends Observer {
 	
 	public String getLocation() {
 			
-		return ((Weather) this.getSubject()).getLocation();
+		return ((Location) this.getSubject()).getLocation();
 		
 	}
 	

@@ -1,11 +1,11 @@
 package main;
 
-class TemperatureMonitor extends WeatherMonitor {
+class TemperatureMonitor extends Observer {
 	
+	private Location subject;
 	private String temperature;
-	
 
-	public TemperatureMonitor(Weather subject) {
+	public TemperatureMonitor(Location subject) {
 		
 		this.setSubject(subject);
 	    this.getSubject().attach(this);
@@ -16,9 +16,7 @@ class TemperatureMonitor extends WeatherMonitor {
 	@Override
 	public void update() {
 		
-		String[] weatherState = ((Weather) this.getSubject()).getState();
-		
-		this.temperature = weatherState[0];
+		this.temperature = this.subject.getState(DataType.temperature);
 		
 	}
 	
@@ -30,7 +28,7 @@ class TemperatureMonitor extends WeatherMonitor {
 	
 	public String getLocation() {
 		
-		return ((Weather) this.getSubject()).getLocation();
+		return ((Location) this.getSubject()).getLocation();
 		
 	}
 	
@@ -38,12 +36,6 @@ class TemperatureMonitor extends WeatherMonitor {
 		
 		return "The temperature at " + this.getLocation() + " is currently " + this.getTemperature();
 		
-	}
-
-	@Override
-	public String[] getRenderContent() {
-		// TODO Auto-generated method stub
-		return new String[]{"The temperature at " + this.getLocation() + " is currently " + this.getTemperature()};
 	}
 
 }

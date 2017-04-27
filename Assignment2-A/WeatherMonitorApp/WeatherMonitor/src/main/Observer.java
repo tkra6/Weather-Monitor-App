@@ -16,13 +16,11 @@ abstract class Observer {
 	public void setSubject(Subject subject) {
 		
 		this.subject = subject;
-		
 	}
 	
 	public Subject getSubject() {
 		
 		return this.subject;
-		
 	}
 
 }
