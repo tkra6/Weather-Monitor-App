@@ -142,7 +142,7 @@ public class WeatherController {
 		    }
 		};
 		// schedule the task to run starting now and then every 5 minutes
-		timer.schedule(updateTask, 0l, 1000*1*5);
+		timer.schedule(updateTask, 0l, 1000*60*5);
 	}
 
 }
