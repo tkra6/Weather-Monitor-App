@@ -97,7 +97,7 @@ public class WeatherController {
 	        	
 	        	if (locationList.getLocation(currLocation) == null) {
 	        		
-	        		locationList.addLocation(new Location(currLocation, webService));
+	        		locationList.addLocation(new Location(currLocation, webService, locationList));
 	        		
 	        	}
 	        	

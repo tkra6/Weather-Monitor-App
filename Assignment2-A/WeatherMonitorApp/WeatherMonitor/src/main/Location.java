@@ -18,14 +18,16 @@ class Location extends Subject {
 	private WeatherWebService webService;
 	private String location;
 	private HashMap <DataType, WeatherData> weatherData;
+	private LocationList storageLocaiton;
 	
 	private int tempListeners;
 	private int rainListeners;
 	
-	public Location(String location, WeatherWebService webService) {
+	public Location(String location, WeatherWebService webService, LocationList storageLocation) {
 		this.location = location;
 		this.webService = webService;
 		this.weatherData = new HashMap<DataType, WeatherData>();
+		this.storageLocaiton = storageLocation;
 		this.tempListeners = 0;
 		this.rainListeners = 0;
 	}
@@ -68,31 +70,38 @@ class Location extends Subject {
 		
 		observers.remove(o);
 		
-		for (DataType data : ((WeatherMonitor) o).getRequiredData()) {
+		if (observers.size() == 0) {
 			
 			
-			switch (data) {
+			
+		} else {
+			
+			for (DataType data : ((WeatherMonitor) o).getRequiredData()) {
 				
-				case rainfall:
-					this.rainListeners--;
-					if (this.rainListeners == 0) {
-						this.weatherData.remove(data);
-					}
-					break;
 				
-				case temperature:
-					this.tempListeners--;
-					if (this.tempListeners == 0) {
-						this.weatherData.remove(data);
-					}
-					break;
+				switch (data) {
+					
+					case rainfall:
+						this.rainListeners--;
+						if (this.rainListeners == 0) {
+							this.weatherData.remove(data);
+						}
+						break;
+					
+					case temperature:
+						this.tempListeners--;
+						if (this.tempListeners == 0) {
+							this.weatherData.remove(data);
+						}
+						break;
+					
+				}
+					
 				
 			}
-				
 			
+			System.out.println("Detatched observer. " + this.rainListeners + " rainListeners and " + this.tempListeners + " tempListeners.");
 		}
-		
-		System.out.println("Detatched observer. " + this.rainListeners + " rainListeners and " + this.tempListeners + " tempListeners.");
 		
 	}
 	
