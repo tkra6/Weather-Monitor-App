@@ -23,40 +23,32 @@ public class WeatherController {
 	/**
 	 * @param args
 	 */
-		
-	public static void main(String[] args) throws Exception {
-		
-		// Create the WeatherWebService object
-		WeatherWebService webService = new MelbourneWeather2();
-		
-		// Create a LocationList object that contains keys for each of the locations (all objects defaulted to null)
-		LocationList locationList = constructLocationList(webService);
-		
-		//TODO find better method to send over locations to GUI (change method in LocationList for returning locations)
-		createAndShowUI(webService.getAllLocations());
-		
-		locationList.addLocation(new Location("Cranbourne", webService));
-		locationList.addLocation(new Location("Rhyll", webService));
-
-		Timer timer = new Timer();
-		TimerTask updateTask = new TimerTask() {
-		    @Override
-		    public void run () {
-		        locationList.updateAllLocations();
-		    }
-		};
-		// schedule the task to run starting now and then every minutes
-		timer.schedule(updateTask, 0l, 1000*60*5);
+	
+	WeatherWebService webService;
+	LocationList locationList;
+	
+	public WeatherController() {
+		this.webService = new MelbourneWeather2();
+		this.locationList = new LocationList(this.webService.getAllLocations());
 	}
 	
-	private static LocationList constructLocationList(WeatherWebService webService) {
+	private void createMonitor(Location location, String monitorType) {
 		
-		String[] locations = webService.getAllLocations();
-		return new LocationList(locations);
+		switch (monitorType) {
+		
+		case "temperature":
+			location.attach(new TemperatureMonitor(location));
+			break;
+			
+		case "rainfall":
+			location.attach(new RainfallMonitor(location));
+			break;
+		
+		}
 		
 	}
 	
-	private static void createAndShowUI(String[] locations) {
+	private void createAndShowUI(String[] locations) {
 		JFrame mainFrame = new JFrame("Melbourne Weather Application");
 	    mainFrame.setLayout(new GridLayout(1, 1));
 	    mainFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -67,9 +59,8 @@ public class WeatherController {
 	    mainFrame.setLocationRelativeTo(null);
 	    mainFrame.setVisible(true);
     }
-
-
-    private static void initComponents(final JFrame frame, String[] locations) {
+	
+    private void initComponents(final JFrame frame, String[] locations) {
 
     	// creates panel to group components together
     	JPanel panel = new JPanel();
@@ -80,7 +71,7 @@ public class WeatherController {
 	    JButton rainfallButton = new JButton("Rainfall");
 
 	    // creates a selectable list that has weather locations as it's data set
-	    final JList list= new JList(locations);
+	    final JList<String> list= new JList<String>(locations);
 	    list.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
 	    
 	    // listener for selecting a location --- using list.getSelectedValue() allows to you
@@ -100,22 +91,15 @@ public class WeatherController {
 	        	// YES -> Do Nothing when button is clicked (clarification needed?)
 	        	// NO -> Create Monitor and get temperature to display in locationLabel
 	        	 
-	        	JFrame f = new JFrame();
-	     	   	f.setLayout(new GridLayout(1, 1));
-	     	   	f.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-	     	    
-	     	   	JLabel locationLabel = new JLabel();        
-	     	   	locationLabel.setText("Location: " + (String) list.getSelectedValue());
-	     	    
-	     	    f.add(locationLabel);
-	     	    f.pack();
-	     	    f.setLocationRelativeTo(null);
-	     	    f.setVisible(true);
-	     	   
-	     	    // TODO:
-	        	// include the method: @Override windowClosing 
-	        	// Implement this to allow for adding methods to call before the window closes entirely
-	     	    // Will allow to detach/destroy the monitor as the frame is closed
+	        	String currLocation = list.getSelectedValue();
+	        	
+	        	if (locationList.getLocation(currLocation) == null) {
+	        		
+	        		locationList.addLocation(new Location(currLocation, webService));
+	        		
+	        	}
+	        	
+	        	createMonitor(locationList.getLocation(currLocation), "temperature");
 	        	 
 	         }
 	      });
@@ -125,5 +109,26 @@ public class WeatherController {
 	    panel.add(rainfallButton, BorderLayout.SOUTH);
 	    frame.add(panel);
     }
+    
+    public static void main(String[] args) throws Exception {
+		
+		WeatherController controller = new WeatherController();
+		
+		//TODO find better method to send over locations to GUI (change method in LocationList for returning locations)
+		controller.createAndShowUI(controller.webService.getAllLocations());
+		
+		controller.locationList.addLocation(new Location("Cranbourne", controller.webService));
+		controller.locationList.addLocation(new Location("Rhyll", controller.webService));
+
+		Timer timer = new Timer();
+		TimerTask updateTask = new TimerTask() {
+		    @Override
+		    public void run () {
+		        controller.locationList.updateAllLocations();
+		    }
+		};
+		// schedule the task to run starting now and then every minutes
+		timer.schedule(updateTask, 0l, 1000*60*5);
+	}
 
 }

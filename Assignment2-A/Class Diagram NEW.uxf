@@ -145,7 +145,7 @@
     </coordinates>
     <panel_attributes>TempMonitor
 --
-- subject : Location
+- location : Location
 - temperature: String
 --
 + createAndDisplayWindow()
@@ -165,7 +165,7 @@
     </coordinates>
     <panel_attributes>RainMonitor
 --
-- subject : Location
+- location : Location
 - rainfall : String
 --
 + createAndDisplayWindow()
@@ -185,7 +185,7 @@
     </coordinates>
     <panel_attributes>RainTempMonitor
 --
-- subject : Location
+- location : Location
 - rainfall : String
 - temperature : String
 --

@@ -3,19 +3,25 @@
  */
 package main;
 
+import java.awt.GridLayout;
+
+import javax.swing.JFrame;
+import javax.swing.JLabel;
+
 /**
  * @author Tom, Doug
  *
  */
-class RainfallMonitor extends Observer {
+class RainfallMonitor extends WeatherMonitor {
 	
-	private Location subject;
+	private JFrame frame;
+	private Location location;
 	private String rainfall;
 
 	public RainfallMonitor(Location subject) {
 		
-		this.setSubject(subject);
-	    this.getSubject().attach(this);
+		this.requiredData = new DataType[]{DataType.rainfall};
+		this.location = subject;
 	    this.update();
 	    
 	}
@@ -23,7 +29,7 @@ class RainfallMonitor extends Observer {
 	@Override
 	public void update() {
 		
-		this.rainfall = this.subject.getState(DataType.rainfall);
+		this.rainfall = this.location.getState(DataType.rainfall);
 
 	}
 	
@@ -35,13 +41,58 @@ class RainfallMonitor extends Observer {
 	
 	public String getLocation() {
 		
-		return ((Location) this.getSubject()).getLocation();
+		return this.location.getLocation();
 		
 	}
 	
-	public String getRenderString() {
+public void createWindow() {
 		
-		return "The rainfall at " + this.getLocation() + " is currently " + this.getRainfall();
+		this.frame = new JFrame();
+		this.frame.setLayout(new GridLayout(0, 1));
+		this.frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+		
+		// TODO:
+    	// include the method: @Override windowClosing 
+    	// Implement this to allow for adding methods to call before the window closes entirely
+ 	    // Will allow to detach/destroy the monitor as the frame is closed
+		
+	}
+	
+	public void displayWindow() {
+		
+		if (this.frame == null) {
+			
+			this.createWindow();
+			
+		} else {
+			this.frame.removeAll();
+		}
+		
+		JLabel locationLabel = new JLabel();        
+ 	   	locationLabel.setText("Location: " + this.getLocation());
+ 	   	
+ 	   	JLabel valueLabel = new JLabel();
+ 	   	valueLabel.setText(this.getRenderContent());
+ 	    
+ 	   	this.frame.add(locationLabel);
+ 	   	this.frame.add(valueLabel);
+ 	   	this.frame.pack();
+ 	   	this.frame.setLocationRelativeTo(null);
+ 	   	this.frame.setVisible(true);
+		
+	}
+	
+	private String getRenderContent() {
+		
+		if (this.rainfall == null) {
+			
+			return ("Rainfall data is not currently available.");
+			
+		} else {
+			
+			return ("Rainfall is currently " + this.rainfall + " millilitres.");
+			
+		}
 		
 	}
 

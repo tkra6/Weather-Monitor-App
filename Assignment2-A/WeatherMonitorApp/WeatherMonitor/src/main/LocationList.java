@@ -40,6 +40,12 @@ public class LocationList {
 		
 	}
 	
+	public Location getLocation(String location) {
+		
+		return this.locationMap.get(location);
+		
+	}
+	
 	public Location[] getAllLocations() {
 		
 		return this.locationMap.values().toArray(new Location[0]);

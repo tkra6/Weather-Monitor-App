@@ -1,43 +1,29 @@
 package main;
 
-import javax.swing.SwingUtilities;
-
 /**
- * @desc ***************************NO LONGER USED*************************
+ * @desc 
  * @author Tom, Doug
  *
  */
 public abstract class WeatherMonitor extends Observer {
 	
-	MonitorWindow window;
+	protected DataType[] requiredData;
 	
 	@Override
 	public abstract void update();
 	
-	public String getLocation() {
-			
-		return ((Location) this.getSubject()).getLocation();
+	public DataType[] getRequiredData() {
+		
+		return this.requiredData;
 		
 	}
-	
-	public abstract String[] getRenderContent();
 	
 	/**
 	 * Method to create and display the window for a weather monitor
 	 * Also contains all event handlers needed for window closing
 	 */
-	public void createAndDisplayWindow() {
-		
-		this.window = new MonitorWindow(this.getLocation(), this.getRenderContent());
-		
-		SwingUtilities.invokeLater(new Runnable() {
-            @Override
-            public void run() {
-                // Figure out how to access this.window
-            }
-        });	
-		
-		
-	}
+	
+	public abstract void createWindow();
+	public abstract void displayWindow();
 	
 }

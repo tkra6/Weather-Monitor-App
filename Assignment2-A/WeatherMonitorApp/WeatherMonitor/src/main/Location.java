@@ -25,31 +25,26 @@ class Location extends Subject {
 		this.weatherData = new HashMap<DataType, WeatherData>();
 	}
 	
-	@Override
-	public void attach(Observer o) {
+	public void attach(WeatherMonitor o) {
 		// TODO: Find a better way of doing this
 		this.observers.add(o);
 		
-		if (o instanceof TemperatureMonitor || o instanceof TemperatureRainfallMonitor) {
-			
-			// If the Location object isn't already tracking temperature, add it to the HashMap
-			if (!weatherData.containsKey(DataType.temperature)) {
+		for (DataType data : o.getRequiredData()) {
+			if (!this.weatherData.containsKey(data)) {
 				
-				weatherData.put(DataType.temperature, new TemperatureData(null));
+				switch (data) {
 				
-			}
-			
-		} 
-		
-		if (o instanceof RainfallMonitor || o instanceof TemperatureRainfallMonitor) {
-			
-			// If the Location object isn't already tracking rainfall, add it to the HashMap
-			if (!weatherData.containsKey(DataType.rainfall)) {
+				case rainfall:
+					this.weatherData.put(data, new TemperatureData(null));
+					break;
 				
-				weatherData.put(DataType.rainfall, new TemperatureData(null));
+				case temperature:
+					this.weatherData.put(data, new RainfallData(null));
+					break;
+				
+				}
 				
 			}
-			
 		}
 		
 	}
