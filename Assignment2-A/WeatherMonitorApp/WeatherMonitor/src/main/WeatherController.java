@@ -88,10 +88,6 @@ public class WeatherController {
 	    // button for selecting temperature according to the list item that's been selected
 	    temperatureButton.addActionListener(new ActionListener() {
 	         public void actionPerformed(ActionEvent e) {
-	        	//TODO:
-	        	// Does location->Monitor exist
-	        	// YES -> Do Nothing when button is clicked (clarification needed?)
-	        	// NO -> Create Monitor and get temperature to display in locationLabel
 	        	 
 	        	String currLocation = list.getSelectedValue();
 	        	
@@ -105,6 +101,25 @@ public class WeatherController {
 	        	 
 	         }
 	      });
+	    
+	    //button for selecting Rainfall according to the list item that's been selected
+	    rainfallButton.addActionListener(new ActionListener() {
+	    
+	    	public void actionPerformed(ActionEvent e) {
+	        	 
+	        	String currLocation = list.getSelectedValue();
+	        	
+	        	if (locationList.getLocation(currLocation) == null) {
+	        		
+	        		locationList.addLocation(new Location(currLocation, webService, locationList));
+	        		
+	        	}
+	        	
+	        	createMonitor(locationList.getLocation(currLocation), "rainfall");
+	        	 
+	         }
+	    
+	    });
         
         panel.add(new JScrollPane(list));
 	    panel.add(temperatureButton, BorderLayout.SOUTH);
@@ -127,7 +142,7 @@ public class WeatherController {
 		    }
 		};
 		// schedule the task to run starting now and then every 5 minutes
-		timer.schedule(updateTask, 0l, 1000*60*5);
+		timer.schedule(updateTask, 0l, 1000*1*5);
 	}
 
 }

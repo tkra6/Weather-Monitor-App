@@ -15,6 +15,8 @@ import javax.swing.JLabel;
 class RainfallMonitor extends WeatherMonitor {
 	
 	private JFrame frame;
+	private JLabel dataLabel;
+	private JLabel locationLabel;
 	private Location location;
 	private String rainfall;
 
@@ -31,6 +33,7 @@ class RainfallMonitor extends WeatherMonitor {
 	public void update() {
 		
 		this.rainfall = this.location.getState(DataType.rainfall);
+		this.displayWindow();
 
 	}
 	
@@ -46,12 +49,23 @@ class RainfallMonitor extends WeatherMonitor {
 		
 	}
 	
-public void createWindow() {
+	public void createWindow() {
 		
 		this.frame = new JFrame();
 		this.frame.setLayout(new GridLayout(0, 1));
 		this.frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		
+		this.locationLabel = new JLabel();        
+ 	   	this.locationLabel.setText("Location: " + this.getLocation());
+ 	   	
+ 	   	this.dataLabel = new JLabel();
+ 	   	this.dataLabel.setText(this.getRenderContent());
+		
+		this.frame.setLocationRelativeTo(null);
+		this.frame.add(this.locationLabel);
+ 	   	this.frame.add(this.dataLabel);
+ 	   	this.frame.pack();
+ 	   	this.frame.setVisible(true);
 		// TODO:
     	// include the method: @Override windowClosing 
     	// Implement this to allow for adding methods to call before the window closes entirely
@@ -66,20 +80,11 @@ public void createWindow() {
 			this.createWindow();
 			
 		} else {
-			this.frame.removeAll();
+			
+			this.dataLabel.setText(this.getRenderContent());
+			frame.pack();
+			
 		}
-		
-		JLabel locationLabel = new JLabel();        
- 	   	locationLabel.setText("Location: " + this.getLocation());
- 	   	
- 	   	JLabel valueLabel = new JLabel();
- 	   	valueLabel.setText(this.getRenderContent());
- 	    
- 	   	this.frame.add(locationLabel);
- 	   	this.frame.add(valueLabel);
- 	   	this.frame.pack();
- 	   	this.frame.setLocationRelativeTo(null);
- 	   	this.frame.setVisible(true);
 		
 	}
 	

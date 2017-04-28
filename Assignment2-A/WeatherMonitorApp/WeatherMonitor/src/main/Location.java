@@ -147,10 +147,9 @@ class Location extends Subject {
 				}
 			}
 		}
-	}
-	
-	public void notifyObservers() {
+		
 		this.notifyObservers();
 	}
+
 }
 
