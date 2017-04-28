@@ -22,6 +22,7 @@ class RainfallMonitor extends WeatherMonitor {
 		
 		this.requiredData = new DataType[]{DataType.rainfall};
 		this.location = subject;
+		this.location.attach(this);
 	    this.update();
 	    
 	}

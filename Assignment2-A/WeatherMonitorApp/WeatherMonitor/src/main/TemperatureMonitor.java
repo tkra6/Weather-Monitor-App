@@ -15,6 +15,7 @@ class TemperatureMonitor extends WeatherMonitor {
 		
 		this.requiredData = new DataType[]{DataType.temperature};
 		this.location = subject;
+		this.location.attach(this);
 	    this.update();
 	    
 	}

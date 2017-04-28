@@ -34,14 +34,16 @@ public class WeatherController {
 	
 	private void createMonitor(Location location, String monitorType) {
 		
+		System.out.println("Creating monitor for " + location.getLocation() + " of type " + monitorType);
+		
 		switch (monitorType) {
 		
 		case "temperature":
-			location.attach(new TemperatureMonitor(location));
+			new TemperatureMonitor(location);
 			break;
 			
 		case "rainfall":
-			location.attach(new RainfallMonitor(location));
+			new RainfallMonitor(location);
 			break;
 		
 		}
@@ -116,9 +118,6 @@ public class WeatherController {
 		
 		//TODO find better method to send over locations to GUI (change method in LocationList for returning locations)
 		controller.createAndShowUI(controller.webService.getAllLocations());
-		
-		controller.locationList.addLocation(new Location("Cranbourne", controller.webService));
-		controller.locationList.addLocation(new Location("Rhyll", controller.webService));
 
 		Timer timer = new Timer();
 		TimerTask updateTask = new TimerTask() {
