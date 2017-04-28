@@ -4,6 +4,8 @@
 package main;
 
 import java.awt.GridLayout;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
 
 import javax.swing.JFrame;
 import javax.swing.JLabel;
@@ -66,10 +68,14 @@ class RainfallMonitor extends WeatherMonitor {
  	   	this.frame.add(this.dataLabel);
  	   	this.frame.pack();
  	   	this.frame.setVisible(true);
-		// TODO:
-    	// include the method: @Override windowClosing 
-    	// Implement this to allow for adding methods to call before the window closes entirely
- 	    // Will allow to detach/destroy the monitor as the frame is closed
+		
+ 	   WeatherMonitor mon = this;
+	   	this.frame.addWindowListener(new WindowAdapter() {
+	      public void windowClosing(WindowEvent ev) {
+	    	  location.detach(mon);
+	          frame.dispose();
+	      }
+	   	});
 		
 	}
 	
