@@ -1,5 +1,6 @@
 package main;
 
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Iterator;
 
@@ -46,9 +47,11 @@ public class LocationList {
 		
 	}
 	
-	public Location[] getAllLocations() {
+	public String[] getAllLocationsSorted() {
 		
-		return this.locationMap.values().toArray(new Location[0]);
+		String[] locationStrings = this.locationMap.keySet().toArray(new String[0]);
+		Arrays.sort(locationStrings);
+		return locationStrings;
 		
 	}
 	

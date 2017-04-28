@@ -131,8 +131,7 @@ public class WeatherController {
 		
 		WeatherController controller = new WeatherController();
 		
-		//TODO find better method to send over locations to GUI (change method in LocationList for returning locations)
-		controller.createAndShowUI(controller.webService.getAllLocations());
+		controller.createAndShowUI(controller.locationList.getAllLocationsSorted());
 
 		Timer timer = new Timer();
 		TimerTask updateTask = new TimerTask() {
