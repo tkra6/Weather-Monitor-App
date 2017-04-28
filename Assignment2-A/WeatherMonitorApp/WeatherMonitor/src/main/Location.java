@@ -72,7 +72,8 @@ class Location extends Subject {
 		
 		if (observers.size() == 0) {
 			
-			
+			this.storageLocaiton.removeLocation(this);
+			System.out.println("Destroyed location");
 			
 		} else {
 			
