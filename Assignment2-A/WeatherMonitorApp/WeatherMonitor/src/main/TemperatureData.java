@@ -4,8 +4,8 @@
 package main;
 
 /**
- * @author Tom, Doug
- *
+ * @author Tom
+ * Basic class for Rainfall Data - doesn't require any special attributes as it only stores text
  */
 class TemperatureData extends WeatherData {
 

@@ -3,7 +3,7 @@ package main;
 /**
  * @desc 
  * @author Tom, Doug
- *
+ * Provides an abstract interface for any type of WeatherMonitor - allows Location objects to see what data is needed by each monitor
  */
 public abstract class WeatherMonitor extends Observer {
 	

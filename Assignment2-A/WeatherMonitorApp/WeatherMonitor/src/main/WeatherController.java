@@ -17,24 +17,28 @@ import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
 /**
  * @author Tom, Doug
- *
+ * The main controller for the application
  */
 public class WeatherController {
-	/**
-	 * @param args
-	 */
 	
+	// References to a webservice and locaitonlist
 	WeatherWebService webService;
 	LocationList locationList;
 	
 	public WeatherController() {
 		this.webService = new MelbourneWeather2();
+		// Test the web service
+		if (this.webService.getAllLocations() == null) {
+			System.err.println("Error: could not connect to the web service.");
+			System.exit(1);
+		}
 		this.locationList = new LocationList(this.webService.getAllLocations());
 	}
 	
+	/**
+	 *  Creates a new monitor based on the monitorType string for the specified location
+	 */
 	private void createMonitor(Location location, String monitorType) {
-		
-		System.out.println("Creating monitor for " + location.getLocation() + " of type " + monitorType);
 		
 		switch (monitorType) {
 		
@@ -50,6 +54,10 @@ public class WeatherController {
 		
 	}
 	
+	/**
+	 * Handles the creation and display of the program's main GUI
+	 * @param locations
+	 */
 	private void createAndShowUI(String[] locations) {
 		JFrame mainFrame = new JFrame("Melbourne Weather Application");
 	    mainFrame.setLayout(new GridLayout(1, 1));
@@ -62,6 +70,9 @@ public class WeatherController {
 	    mainFrame.setVisible(true);
     }
 	
+	/**
+	 * Initialises the components needed by the GUI for the specified JFrame and array of location strings
+	 */
     private void initComponents(final JFrame frame, String[] locations) {
 
     	// creates panel to group components together
@@ -121,6 +132,7 @@ public class WeatherController {
 	    
 	    });
         
+	    // Add all of the components to the panel
         panel.add(new JScrollPane(list));
 	    panel.add(temperatureButton, BorderLayout.SOUTH);
 	    panel.add(rainfallButton, BorderLayout.SOUTH);
@@ -129,10 +141,14 @@ public class WeatherController {
     
     public static void main(String[] args) throws Exception {
 		
+    	System.out.println("Starting up application...");
+    	// Create the controller object
 		WeatherController controller = new WeatherController();
-		
+		System.out.println("Displaying GUI");
+		// Create and display the GUI for the application
 		controller.createAndShowUI(controller.locationList.getAllLocationsSorted());
-
+		
+		// This schedules the updateAllLocations function of the locationList to be run every 5 minutes
 		Timer timer = new Timer();
 		TimerTask updateTask = new TimerTask() {
 		    @Override

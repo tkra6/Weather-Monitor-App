@@ -5,7 +5,7 @@ package main;
 
 /**
  * @author Tom, Doug
- *
+ * Abstract class that defines the WeatherData objects - currently only stores a string but this could be easily modified
  */
 abstract class WeatherData {
 	

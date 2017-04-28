@@ -4,8 +4,8 @@
 package main;
 
 /**
- * @author Tom, Doug
- *
+ * @author Tom
+ * Abstract class for an observer
  */
 
 abstract class Observer {

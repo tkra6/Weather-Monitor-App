@@ -7,7 +7,7 @@ import java.util.HashSet;
 
 /**
  * @author Tom
- *
+ * Abstract class for a Subject
  */
 abstract class Subject {
 

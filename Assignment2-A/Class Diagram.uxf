@@ -215,13 +215,15 @@
     <coordinates>
       <x>735</x>
       <y>371</y>
-      <w>133</w>
+      <w>154</w>
       <h>56</h>
     </coordinates>
     <panel_attributes>WeatherController
 --
 - main()
-- constructLocationMap()</panel_attributes>
+- constructLocationMap()
+- createAndShowUI(String[])
+</panel_attributes>
     <additional_attributes/>
   </element>
   <element>
@@ -238,7 +240,8 @@
 --
 + addLocation(Location)
 + removeLocation(Location)
-+ updateAllLocations()</panel_attributes>
++ updateAllLocations()
++ getLocation(String)</panel_attributes>
     <additional_attributes/>
   </element>
   <element>
@@ -334,5 +337,27 @@ requiredData : Array[DataType enum]
     </coordinates>
     <panel_attributes>lt=&lt;&lt;-</panel_attributes>
     <additional_attributes>10.0;10.0;80.0;10.0;80.0;70.0;130.0;70.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>469</x>
+      <y>329</y>
+      <w>266</w>
+      <h>210</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;-</panel_attributes>
+    <additional_attributes>360.0;280.0;10.0;10.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>539</x>
+      <y>245</y>
+      <w>280</w>
+      <h>21</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;-</panel_attributes>
+    <additional_attributes>10.0;10.0;380.0;10.0</additional_attributes>
   </element>
 </diagram>

@@ -8,6 +8,12 @@ import melbourneweather2.ExceptionException;
 import melbourneweather2.MelbourneWeather2Stub;
 import melbourneweather2.MelbourneWeather2Stub.*;
 
+/**
+ * 
+ * @author douglas
+ * A concrete implementation of a WeatherWebService, using the MelbourneWeather2 SOAP service
+ */
+
 public class MelbourneWeather2 extends WeatherWebService {
 	
 	private MelbourneWeather2Stub MelbourneWeatherService;
@@ -32,9 +38,8 @@ public class MelbourneWeather2 extends WeatherWebService {
 		try {
 			LocationsResponse = this.MelbourneWeatherService.getLocations();
 		} catch (RemoteException | ExceptionException e) {
-			// TODO Auto-generated catch block
-			// Add code for handling if the location cannot be found
 			e.printStackTrace();
+			System.err.println("Error: could not connect to the web service.");
 			return null;
 		}
 		
