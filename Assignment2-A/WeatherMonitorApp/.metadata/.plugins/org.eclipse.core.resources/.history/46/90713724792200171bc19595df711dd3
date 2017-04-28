@@ -1,7 +1,0 @@
-package main;
-
-import java.lang.Exception;
-
-import melbourneweather2.MelbourneWeather2Stub;
-import melbourneweather2.MelbourneWeather2Stub.*;
-
