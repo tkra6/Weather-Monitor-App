@@ -19,10 +19,15 @@ class Location extends Subject {
 	private String location;
 	private HashMap <DataType, WeatherData> weatherData;
 	
+	private int tempListeners;
+	private int rainListeners;
+	
 	public Location(String location, WeatherWebService webService) {
 		this.location = location;
 		this.webService = webService;
 		this.weatherData = new HashMap<DataType, WeatherData>();
+		this.tempListeners = 0;
+		this.rainListeners = 0;
 	}
 	
 	@Override
@@ -32,22 +37,29 @@ class Location extends Subject {
 		
 		for (DataType data : ((WeatherMonitor) o).getRequiredData()) {
 			
-			if (!this.weatherData.containsKey(data)) {
 				
-				switch (data) {
+			switch (data) {
 				
 				case rainfall:
-					this.weatherData.put(data, new RainfallData(this.webService.getRainfallForLocation(this.location)));
+					if (this.rainListeners == 0) {
+						this.weatherData.put(data, new RainfallData(this.webService.getRainfallForLocation(this.location)));
+					}
+					this.rainListeners++;
 					break;
 				
 				case temperature:
-					this.weatherData.put(data, new TemperatureData(this.webService.getTemperatureForLocation(this.location)));
+					if (this.tempListeners == 0) {
+						this.weatherData.put(data, new TemperatureData(this.webService.getTemperatureForLocation(this.location)));
+					}
+					this.tempListeners++;
 					break;
 				
-				}
-				
 			}
+				
+			
 		}
+		
+		System.out.println("Attached observer. " + this.rainListeners + " rainListeners and " + this.tempListeners + " tempListeners.");
 		
 	}
 	
@@ -56,41 +68,31 @@ class Location extends Subject {
 		
 		observers.remove(o);
 		
-		Iterator<Observer> it = observers.iterator();
-		
-		boolean temperature = false;
-		boolean rainfall = false;
-		
-		Observer ob;
-		
-		while (it.hasNext()) {
+		for (DataType data : ((WeatherMonitor) o).getRequiredData()) {
 			
-			ob = it.next();
 			
-			if (ob instanceof TemperatureMonitor || ob instanceof TemperatureRainfallMonitor) {
+			switch (data) {
 				
-				temperature = true;
+				case rainfall:
+					this.rainListeners--;
+					if (this.rainListeners == 0) {
+						this.weatherData.remove(data);
+					}
+					break;
 				
-			}
-			
-			if (ob instanceof RainfallMonitor || ob instanceof TemperatureRainfallMonitor) {
-				
-				rainfall = true;
+				case temperature:
+					this.tempListeners--;
+					if (this.tempListeners == 0) {
+						this.weatherData.remove(data);
+					}
+					break;
 				
 			}
-			
-			if (temperature && rainfall) {
-				break;
-			}
+				
 			
 		}
 		
-		if (!temperature) {
-			this.weatherData.put(DataType.temperature, null);
-		}
-		if (!rainfall) {
-			this.weatherData.put(DataType.rainfall, null);
-		}
+		System.out.println("Detatched observer. " + this.rainListeners + " rainListeners and " + this.tempListeners + " tempListeners.");
 		
 	}
 	

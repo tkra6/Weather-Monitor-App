@@ -126,7 +126,7 @@ public class WeatherController {
 		        controller.locationList.updateAllLocations();
 		    }
 		};
-		// schedule the task to run starting now and then every minutes
+		// schedule the task to run starting now and then every 5 minutes
 		timer.schedule(updateTask, 0l, 1000*60*5);
 	}
 
