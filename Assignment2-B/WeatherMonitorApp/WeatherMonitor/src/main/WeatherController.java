@@ -21,7 +21,7 @@ import javax.swing.event.ListSelectionListener;
  */
 public class WeatherController {
 	
-	// References to a webservice and locaitonlist
+	// References to a webservice and locationlist
 	WeatherWebService webService;
 	LocationList locationList;
 	
@@ -48,6 +48,10 @@ public class WeatherController {
 			
 		case "rainfall":
 			new RainfallMonitor(location);
+			break;
+			
+		case "temperatureRainfall":
+			new TemperatureRainfallMonitor(location);
 			break;
 		
 		}
@@ -82,6 +86,7 @@ public class WeatherController {
 	    // creating buttons
 	    JButton temperatureButton = new JButton("Temperature");        
 	    JButton rainfallButton = new JButton("Rainfall");
+	    JButton temperatureRainfallButton = new JButton("TemperatureRainfall");
 
 	    // creates a selectable list that has weather locations as it's data set
 	    final JList<String> list= new JList<String>(locations);
@@ -131,11 +136,29 @@ public class WeatherController {
 	         }
 	    
 	    });
+	    
+	    // button for selecting temperature and rainfall according to the list item that's been selected
+	    temperatureRainfallButton.addActionListener(new ActionListener() {
+         public void actionPerformed(ActionEvent e) {
+        	 
+        	String currLocation = list.getSelectedValue();
+        	
+        	if (locationList.getLocation(currLocation) == null) {
+        		
+        		locationList.addLocation(new Location(currLocation, webService, locationList));
+        		
+        	}
+        	
+        	createMonitor(locationList.getLocation(currLocation), "temperatureRainfall");
+        	 
+         }
+      });
         
 	    // Add all of the components to the panel
         panel.add(new JScrollPane(list));
 	    panel.add(temperatureButton, BorderLayout.SOUTH);
 	    panel.add(rainfallButton, BorderLayout.SOUTH);
+	    panel.add(temperatureRainfallButton, BorderLayout.SOUTH);
 	    frame.add(panel);
     }
     

@@ -66,11 +66,19 @@ class Location extends Subject {
 					}
 					this.tempListeners++;
 					break;
-				
+					
+				case temperatureRainfall:
+					if (this.tempListeners == 0) {
+						this.weatherData.put(data.temperature, new TemperatureData(this.webService.getTemperatureForLocation(this.location)));
+					}
+					this.tempListeners++;
+					if (this.rainListeners == 0) {
+						this.weatherData.put(data.rainfall, new RainfallData(this.webService.getRainfallForLocation(this.location)));
+					}
+					this.rainListeners++;
+					break;
 			}	
-			
 		}
-		
 	}
 	
 	/**
