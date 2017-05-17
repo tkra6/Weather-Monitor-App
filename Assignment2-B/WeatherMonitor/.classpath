@@ -13,5 +13,7 @@
 	</classpathentry>
 	<classpathentry kind="con" path="org.eclipse.jst.j2ee.internal.web.container"/>
 	<classpathentry kind="con" path="org.eclipse.jst.j2ee.internal.module.container"/>
+	<classpathentry kind="lib" path="/home/douglas/workspace/jfreechart-1.0.1/lib/jfreechart-1.0.1.jar"/>
+	<classpathentry kind="lib" path="/home/douglas/workspace/jfreechart-1.0.1/lib/jcommon-1.0.0.jar"/>
 	<classpathentry kind="output" path="build/classes"/>
 </classpath>

@@ -1,0 +1,20 @@
+TASKS OUTSTANDING
+
+- Develop GraphicalRainfallMonitor and GraphicalTempMonitor
+- Develop GraphicalRainfallTempMonitor
+
+- Change the WeatherWebService abstract class and all implementations to pass
+through [value, format, timestamp]
+- Change the weather data objects to store value (as a number), format, and timestamp
+
+- Develop the new WebService class to use the new web service
+
+- Get the new web service working
+- Add a new LocationList to the controller
+- Update the GUI to include the new loation list and all listeners
+
+
+- Update class diagram and sequence diagrams
+- Add more use cases
+
+- Write up written report on design patterns
