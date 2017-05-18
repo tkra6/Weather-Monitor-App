@@ -107,6 +107,13 @@ public class WeatherController {
 	        	 
 	        	String currLocation = list.getSelectedValue();
 	        	
+	        	if (currLocation == null) {
+	        		
+	        		// No list value has been selected - do nothing
+	        		return;
+	        		
+	        	}
+	        	
 	        	if (locationList.getLocation(currLocation) == null) {
 	        		
 	        		locationList.addLocation(new Location(currLocation, webService, locationList));
@@ -125,6 +132,13 @@ public class WeatherController {
 	        	 
 	        	String currLocation = list.getSelectedValue();
 	        	
+	        	if (currLocation == null) {
+	        		
+	        		// No list value has been selected - do nothing
+	        		return;
+	        		
+	        	}
+	        	
 	        	if (locationList.getLocation(currLocation) == null) {
 	        		
 	        		locationList.addLocation(new Location(currLocation, webService, locationList));
@@ -142,6 +156,13 @@ public class WeatherController {
          public void actionPerformed(ActionEvent e) {
         	 
         	String currLocation = list.getSelectedValue();
+        	
+        	if (currLocation == null) {
+        		
+        		// No list value has been selected - do nothing
+        		return;
+        		
+        	}
         	
         	if (locationList.getLocation(currLocation) == null) {
         		
