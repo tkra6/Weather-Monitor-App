@@ -8,7 +8,7 @@ package main;
 abstract class WeatherWebService {
 	
 	public abstract String[] getAllLocations();
-	public abstract String getRainfallForLocation(String location);
-	public abstract String getTemperatureForLocation(String location);
+	public abstract String[] getRainfallForLocation(String location);
+	public abstract String[] getTemperatureForLocation(String location);
 	
 }

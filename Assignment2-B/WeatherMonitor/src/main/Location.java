@@ -67,16 +67,6 @@ class Location extends Subject {
 					this.tempListeners++;
 					break;
 					
-				case temperatureRainfall:
-					if (this.tempListeners == 0) {
-						this.weatherData.put(data.temperature, new TemperatureData(this.webService.getTemperatureForLocation(this.location)));
-					}
-					this.tempListeners++;
-					if (this.rainListeners == 0) {
-						this.weatherData.put(data.rainfall, new RainfallData(this.webService.getRainfallForLocation(this.location)));
-					}
-					this.rainListeners++;
-					break;
 			}	
 		}
 	}
@@ -136,9 +126,9 @@ class Location extends Subject {
 	
 	/**
 	 * @desc returns data value of a specific type
-	 * @return A string, the value of whatever data was requested
+	 * @return A weather data object, whatever data was requested
 	 */
-	public String getState(DataType type) {
+	public WeatherData getState(DataType type) {
 		
 		if (this.weatherData.get(type) == null) {
 			
@@ -146,7 +136,7 @@ class Location extends Subject {
 			
 		}
 		
-		return this.weatherData.get(type).getData();
+		return this.weatherData.get(type);
 		
 	}
 	
@@ -174,6 +164,9 @@ class Location extends Subject {
 					
 				case rainfall:	entry.getValue().setData(this.webService.getRainfallForLocation(this.location));
 				break;
+					
+				default:
+					break;
 				}
 			}
 		}

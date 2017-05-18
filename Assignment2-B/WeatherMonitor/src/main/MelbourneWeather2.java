@@ -48,7 +48,7 @@ public class MelbourneWeather2 extends WeatherWebService {
 	}
 
 	@Override
-	public String getRainfallForLocation(String location) {
+	public String[] getRainfallForLocation(String location) {
 		/// Get rainfall
 		GetRainfall RainfallRequest = new GetRainfall();
 		RainfallRequest.setLocation(location);
@@ -61,11 +61,11 @@ public class MelbourneWeather2 extends WeatherWebService {
 			return null;
 		}
 		String[] rainfall = RainfallResponse.get_return();
-		return rainfall[1];
+		return new String[] {rainfall[1], "mm", rainfall[0]};
 	}
 
 	@Override
-	public String getTemperatureForLocation(String location) {
+	public String[] getTemperatureForLocation(String location) {
 		GetTemperature TemperatureRequest = new GetTemperature();
 		TemperatureRequest.setLocation(location);
 		GetTemperatureResponse TemperatureResponse;
@@ -77,7 +77,7 @@ public class MelbourneWeather2 extends WeatherWebService {
 			return null;
 		}
 		String[] temperature = TemperatureResponse.get_return();
-		return temperature[1];
+		return new String[] {temperature[1], "C", temperature[0]};
 	}
 
 }

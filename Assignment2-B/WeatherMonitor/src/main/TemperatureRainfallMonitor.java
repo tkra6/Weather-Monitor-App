@@ -23,12 +23,14 @@ public class TemperatureRainfallMonitor extends WeatherMonitor {
 	private JLabel locationLabel;
 	// References to what the Monitor is storing
 	private Location location;
-	private String temperature;
-	private String rainfall;
+	private WeatherData temperature;
+	private WeatherData rainfall;
+	
+	
 
 	public TemperatureRainfallMonitor(Location subject) {
 		
-		this.requiredData = new DataType[]{DataType.temperatureRainfall};
+		this.requiredData = new DataType[]{DataType.temperature, DataType.rainfall};
 		this.location = subject;
 		this.location.attach(this);
 	    this.update();
@@ -47,15 +49,15 @@ public class TemperatureRainfallMonitor extends WeatherMonitor {
 		
 	}
 	
-	public String getTemperature() {
+	public float getTemperature() {
 		
-		return this.temperature;
+		return this.temperature.getData();
 		
 	}
 	
-	public String getRainfall() {
+	public float getRainfall() {
 		
-		return this.rainfall;
+		return this.rainfall.getData();
 	}
 	
 	public String getLocation() {
@@ -121,26 +123,27 @@ public class TemperatureRainfallMonitor extends WeatherMonitor {
 	 */
 	private String getRenderContent() {
 		
-		if (this.temperature == null || this.temperature == "") {
+		if (this.temperature == null || this.temperature.getFormat() == "") {
 			
-			if (this.rainfall == null || this.rainfall == "") {
+			if (this.rainfall == null || this.rainfall.getFormat() == "") {
 				
 				return ("Temperature and rainfall data is not currently available");
+				
 			} else {
 				
-				return ("Temperature data is not currently available. Rainfall is currently " + this.rainfall + " milliletres");
+				return ("Temperature data is not currently available. Rainfall is currently " + this.rainfall.getData() + " milliletres");
 			}
 			
 		} else {
 			
-			if (this.rainfall == null || this.rainfall == "") {
+			if (this.rainfall == null || this.rainfall.getFormat() == "") {
 				
 				
 				return ("Termperature is " + this.temperature + " degrees Celsius. Rainfall data is not currently available");
 			}
 			
-			return ("Temperature is currently " + this.temperature + " degrees Celsius. "
-					+ "Rainfall is currently " + this.rainfall + " milliletres");
+			return ("Temperature is currently " + this.temperature.getData() + " degrees Celsius. "
+					+ "Rainfall is currently " + this.rainfall.getData() + " milliletres");
 		}
 	}
 }

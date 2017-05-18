@@ -22,7 +22,7 @@ class RainfallMonitor extends WeatherMonitor {
 	private JLabel locationLabel;
 	// References to what the Monitor is storing
 	private Location location;
-	private String rainfall;
+	private WeatherData rainfall;
 
 	public RainfallMonitor(Location subject) {
 		
@@ -40,13 +40,14 @@ class RainfallMonitor extends WeatherMonitor {
 	public void update() {
 		
 		this.rainfall = this.location.getState(DataType.rainfall);
+		
 		this.displayWindow();
 
 	}
 	
 	public String getRainfall() {
 		
-		return this.rainfall;
+		return String.valueOf(this.rainfall);
 		
 	}
 	
@@ -113,13 +114,13 @@ class RainfallMonitor extends WeatherMonitor {
 	 */
 	private String getRenderContent() {
 		
-		if (this.rainfall == null || this.rainfall == "") {
+		if (this.rainfall == null || this.rainfall.getFormat() == null) {
 			
 			return ("Rainfall data is not currently available.");
 			
 		} else {
 			
-			return ("Rainfall is currently " + this.rainfall + " millilitres.");
+			return ("Rainfall is currently " + this.rainfall.getData() + " millilitres.");
 			
 		}
 		

@@ -9,7 +9,7 @@ package main;
  */
 class TemperatureData extends WeatherData {
 
-	public TemperatureData (String data) {
+	public TemperatureData (String[] data) {
 		
 		this.setData(data);
 	}

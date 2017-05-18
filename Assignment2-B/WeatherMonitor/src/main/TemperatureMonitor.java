@@ -19,7 +19,7 @@ class TemperatureMonitor extends WeatherMonitor {
 	private JLabel locationLabel;
 	// References to what the Monitor is storing
 	private Location location;
-	private String temperature;
+	private WeatherData temperature;
 
 	public TemperatureMonitor(Location subject) {
 		
@@ -37,13 +37,14 @@ class TemperatureMonitor extends WeatherMonitor {
 	public void update() {
 		
 		this.temperature = this.location.getState(DataType.temperature);
+
 		this.displayWindow();
 		
 	}
 	
 	public String getTemperature() {
 		
-		return this.temperature;
+		return String.valueOf(this.temperature.getData());
 		
 	}
 	
@@ -110,13 +111,13 @@ class TemperatureMonitor extends WeatherMonitor {
 	 */
 	private String getRenderContent() {
 		
-		if (this.temperature == null || this.temperature == "") {
+		if (this.temperature == null || this.temperature.getFormat() == null) {
 			
 			return ("Temperature data is not currently available.");
 			
 		} else {
 			
-			return ("Temperature is currently " + this.temperature + " degrees Celsius.");
+			return ("Temperature is currently " + this.temperature.getData() + " degrees Celsius.");
 			
 		}
 		
