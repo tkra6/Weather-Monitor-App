@@ -1,0 +1,16 @@
+/**
+ * 
+ */
+package main;
+
+/**
+ * @author Tom
+ * A concrete implementation of a WeatherWebService, using MelbourneWeatherTimeLapse SOAP service
+ *
+ */
+public class MelbourneWeatherTimeLapse extends WeatherWebService {
+	
+	
+	
+
+}
