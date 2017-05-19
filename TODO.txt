@@ -4,8 +4,9 @@ TASKS OUTSTANDING
 - Develop GraphicalRainfallTempMonitor
 
 - Change the WeatherWebService abstract class and all implementations to pass
-through [value, format, timestamp]
-- Change the weather data objects to store value (as a number), format, and timestamp
+through [value, format, timestamp] - DONE
+- Change the weather data objects to store value (as a number), format, 
+and timestamp - DONE
 
 - Develop the new WebService class to use the new web service
 
