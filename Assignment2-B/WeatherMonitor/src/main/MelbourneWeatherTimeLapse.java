@@ -1,0 +1,65 @@
+/**
+ * 
+ */
+package main;
+
+import java.rmi.RemoteException;
+
+import org.apache.axis2.AxisFault;
+
+import melbourneweathertimelapse.MelbourneWeatherTimeLapseStub;
+import melbourneweathertimelapse.MelbourneWeatherTimeLapseStub.*;
+import melbourneweathertimelapse.ExceptionException;
+
+/**
+ * @author Tom
+ * A concrete implementation of a WeatherWebService, using MelbourneWeatherTimeLapse SOAP service
+ *
+ */
+public class MelbourneWeatherTimeLapse extends WeatherWebService {
+	
+	private MelbourneWeatherTimeLapseStub MelbourneWeatherService;
+
+	public MelbourneWeatherTimeLapse() {
+		
+		try {
+			MelbourneWeatherService = new MelbourneWeatherTimeLapseStub();
+		} catch (AxisFault e) {
+			// TODO Auto-generated catch block
+			// Add code for if the weather service cannot be instantiated
+			e.printStackTrace();
+		}
+		
+	}
+	
+	@Override
+	public String[] getAllLocations() {
+		
+		GetLocationsResponse LocationsResponse;
+		
+		try {
+			LocationsResponse = this.MelbourneWeatherService.getLocations();
+		} catch (RemoteException | ExceptionException e) {
+			e.printStackTrace();
+			System.err.println("Error: could not connect to the web service.");
+			return null;
+		}
+		
+		String[] locations = LocationsResponse.get_return();
+		return locations;
+	}
+	
+	@Override
+	public String[] getRainfallForLocation(String location) {
+		
+		return null;
+	}
+	
+	@Override
+	public String[] getTemperatureForLocation(String location) {
+		
+		return null;
+	}
+
+
+}

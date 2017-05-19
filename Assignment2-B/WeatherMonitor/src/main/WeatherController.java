@@ -9,6 +9,9 @@ import java.awt.Dimension;
 import java.awt.GridLayout;
 import java.awt.event.*;
 import java.util.TimerTask;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Iterator;
 import java.util.Timer;
 import java.awt.*;
 
@@ -21,18 +24,37 @@ import javax.swing.event.ListSelectionListener;
  */
 public class WeatherController {
 	
-	// References to a webservice and locationlist
-	WeatherWebService webService;
-	LocationList locationList;
+//    HashMap<String, LocationList> locationListCollection;
+	
+	// References to a webservice and locationlist (melbourne weather 2)
+	WeatherWebService MW2Service;
+	LocationList MW2LocationList;
+
+	// References to a webservice and locationlist (melbourne time lapse)
+	WeatherWebService MWTimeLapseService;
+	LocationList MWTimeLapseLocationList;
 	
 	public WeatherController() {
-		this.webService = new MelbourneWeather2();
+		this.MW2Service = new MelbourneWeather2();
+		this.MWTimeLapseService = new MelbourneWeatherTimeLapse();
+		
 		// Test the web service
-		if (this.webService.getAllLocations() == null) {
+		if (this.MW2Service.getAllLocations() == null) {
 			System.err.println("Error: could not connect to the web service.");
 			System.exit(1);
 		}
-		this.locationList = new LocationList(this.webService.getAllLocations());
+		if (this.MWTimeLapseService.getAllLocations() == null) {
+			System.err.println("Error: could not connect to the web service.");
+			System.exit(1);
+		}
+		
+		this.MW2LocationList = new LocationList(this.MW2Service.getAllLocations());
+		this.MWTimeLapseLocationList = new LocationList(this.MWTimeLapseService.getAllLocations());
+//		locationListCollection.put("MW2Locations", this.MW2LocationList);
+//		locationListCollection.put("MWTimeLapseLocations", this.MWTimeLapseLocationList);
+		
+
+
 	}
 	
 	/**
@@ -60,14 +82,14 @@ public class WeatherController {
 	
 	/**
 	 * Handles the creation and display of the program's main GUI
-	 * @param locations
+	 * @param location
 	 */
-	private void createAndShowUI(String[] locations) {
+	private void createAndShowUI(String[] location) {
 		JFrame mainFrame = new JFrame("Melbourne Weather Application");
 	    mainFrame.setLayout(new GridLayout(1, 1));
 	    mainFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
-        initComponents(mainFrame, locations);
+        initComponents(mainFrame, location);
 
 	    mainFrame.pack();
 	    mainFrame.setLocationRelativeTo(null);
@@ -80,21 +102,33 @@ public class WeatherController {
     private void initComponents(final JFrame frame, String[] locations) {
 
     	// creates panel to group components together
-    	JPanel panel = new JPanel();
-	    panel.setLayout(new FlowLayout());
+    	JPanel baseLayoutPanel = new JPanel();
+    	baseLayoutPanel.setLayout(new GridLayout(2, 1));
+    	
+    	JPanel MW2Panel = new JPanel();
+	    MW2Panel.setLayout(new FlowLayout());
+	    
+	    JPanel MWTimeLapsePanel = new JPanel();
+	    MWTimeLapsePanel.setLayout(new FlowLayout());
 	    
 	    // creating buttons
-	    JButton temperatureButton = new JButton("Temperature");        
-	    JButton rainfallButton = new JButton("Rainfall");
-	    JButton temperatureRainfallButton = new JButton("TemperatureRainfall");
-
+	    JButton MW2TempButton = new JButton("Temperature");
+	    JButton MWTimeLapseTempButton = new JButton("Temperature"); 
+	    JButton MW2RainfallButton = new JButton("Rainfall");
+	    JButton MWTimeLapseRainfallButton = new JButton("Rainfall");
+	    JButton MW2TempRainButton = new JButton("TemperatureRainfall");
+	    JButton MWTimeLapseTempRainButton = new JButton("TemperatureRainfall");
+	    
 	    // creates a selectable list that has weather locations as it's data set
-	    final JList<String> list= new JList<String>(locations);
-	    list.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
+	    final JList<String> MW2List = new JList<String>(locations);
+	    MW2List.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
+	    
+	    final JList<String> MWTimeLapseList = new JList<String>(locations);
+	    MWTimeLapseList.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
 	    
 	    // listener for selecting a location --- using list.getSelectedValue() allows to you
 	    // obtain the currently selected location as a string (used for buttons further down)
-	    list.addListSelectionListener(new ListSelectionListener() {
+	    MW2List.addListSelectionListener(new ListSelectionListener() {
 	      public void valueChanged(ListSelectionEvent e) {
 	        if (!e.getValueIsAdjusting()) {
 	        }
@@ -102,10 +136,10 @@ public class WeatherController {
 	    });
 	    
 	    // button for selecting temperature according to the list item that's been selected
-	    temperatureButton.addActionListener(new ActionListener() {
+	    MW2TempButton.addActionListener(new ActionListener() {
 	         public void actionPerformed(ActionEvent e) {
 	        	 
-	        	String currLocation = list.getSelectedValue();
+	        	String currLocation = MW2List.getSelectedValue();
 	        	
 	        	if (currLocation == null) {
 	        		
@@ -114,23 +148,23 @@ public class WeatherController {
 	        		
 	        	}
 	        	
-	        	if (locationList.getLocation(currLocation) == null) {
+	        	if (MW2LocationList.getLocation(currLocation) == null) {
 	        		
-	        		locationList.addLocation(new Location(currLocation, webService, locationList));
+	        		MW2LocationList.addLocation(new Location(currLocation, MW2Service, MW2LocationList));
 	        		
 	        	}
 	        	
-	        	createMonitor(locationList.getLocation(currLocation), "temperature");
+	        	createMonitor(MW2LocationList.getLocation(currLocation), "temperature");
 	        	 
 	         }
 	      });
 	    
 	    //button for selecting Rainfall according to the list item that's been selected
-	    rainfallButton.addActionListener(new ActionListener() {
+	    MW2RainfallButton.addActionListener(new ActionListener() {
 	    
 	    	public void actionPerformed(ActionEvent e) {
 	        	 
-	        	String currLocation = list.getSelectedValue();
+	        	String currLocation = MW2List.getSelectedValue();
 	        	
 	        	if (currLocation == null) {
 	        		
@@ -139,23 +173,23 @@ public class WeatherController {
 	        		
 	        	}
 	        	
-	        	if (locationList.getLocation(currLocation) == null) {
+	        	if (MW2LocationList.getLocation(currLocation) == null) {
 	        		
-	        		locationList.addLocation(new Location(currLocation, webService, locationList));
+	        		MW2LocationList.addLocation(new Location(currLocation, MW2Service, MW2LocationList));
 	        		
 	        	}
 	        	
-	        	createMonitor(locationList.getLocation(currLocation), "rainfall");
+	        	createMonitor(MW2LocationList.getLocation(currLocation), "rainfall");
 	        	 
 	         }
 	    
 	    });
 	    
 	    // button for selecting temperature and rainfall according to the list item that's been selected
-	    temperatureRainfallButton.addActionListener(new ActionListener() {
+	    MW2TempRainButton.addActionListener(new ActionListener() {
          public void actionPerformed(ActionEvent e) {
         	 
-        	String currLocation = list.getSelectedValue();
+        	String currLocation = MW2List.getSelectedValue();
         	
         	if (currLocation == null) {
         		
@@ -164,23 +198,30 @@ public class WeatherController {
         		
         	}
         	
-        	if (locationList.getLocation(currLocation) == null) {
+        	if (MW2LocationList.getLocation(currLocation) == null) {
         		
-        		locationList.addLocation(new Location(currLocation, webService, locationList));
+        		MW2LocationList.addLocation(new Location(currLocation, MW2Service, MW2LocationList));
         		
         	}
         	
-        	createMonitor(locationList.getLocation(currLocation), "temperatureRainfall");
+        	createMonitor(MW2LocationList.getLocation(currLocation), "temperatureRainfall");
         	 
          }
       });
         
 	    // Add all of the components to the panel
-        panel.add(new JScrollPane(list));
-	    panel.add(temperatureButton, BorderLayout.SOUTH);
-	    panel.add(rainfallButton, BorderLayout.SOUTH);
-	    panel.add(temperatureRainfallButton, BorderLayout.SOUTH);
-	    frame.add(panel);
+        MW2Panel.add(new JScrollPane(MW2List));
+        MWTimeLapsePanel.add(new JScrollPane(MWTimeLapseList));
+	    MW2Panel.add(MW2TempButton, BorderLayout.SOUTH);
+	    MWTimeLapsePanel.add(MWTimeLapseTempButton, BorderLayout.SOUTH);
+	    MW2Panel.add(MW2RainfallButton, BorderLayout.SOUTH);
+	    MWTimeLapsePanel.add(MWTimeLapseRainfallButton, BorderLayout.SOUTH);
+	    MW2Panel.add(MW2TempRainButton, BorderLayout.SOUTH);
+	    MWTimeLapsePanel.add(MWTimeLapseTempRainButton, BorderLayout.SOUTH);
+	    baseLayoutPanel.add(MW2Panel);
+	    baseLayoutPanel.add(MWTimeLapsePanel);
+	    frame.add(baseLayoutPanel);
+	    
     }
     
     public static void main(String[] args) throws Exception {
@@ -190,14 +231,14 @@ public class WeatherController {
 		WeatherController controller = new WeatherController();
 		System.out.println("Displaying GUI");
 		// Create and display the GUI for the application
-		controller.createAndShowUI(controller.locationList.getAllLocationsSorted());
+		controller.createAndShowUI(controller.MW2LocationList.getAllLocationsSorted());
 		
 		// This schedules the updateAllLocations function of the locationList to be run every 5 minutes
 		Timer timer = new Timer();
 		TimerTask updateTask = new TimerTask() {
 		    @Override
 		    public void run () {
-		        controller.locationList.updateAllLocations();
+		        controller.MW2LocationList.updateAllLocations();
 		    }
 		};
 		// schedule the task to run starting now and then every 5 minutes
