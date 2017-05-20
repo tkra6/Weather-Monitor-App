@@ -208,6 +208,89 @@ public class WeatherController {
         	 
          }
       });
+	    
+	 // listener for selecting a location --- using list.getSelectedValue() allows to you
+	    // obtain the currently selected location as a string (used for buttons further down)
+	    MWTimeLapseList.addListSelectionListener(new ListSelectionListener() {
+	      public void valueChanged(ListSelectionEvent e) {
+	        if (!e.getValueIsAdjusting()) {
+	        }
+	      }
+	    });
+	    
+	    // button for selecting temperature according to the list item that's been selected
+	    MWTimeLapseTempButton.addActionListener(new ActionListener() {
+	         public void actionPerformed(ActionEvent e) {
+	        	 
+	        	String currLocation = MWTimeLapseList.getSelectedValue();
+	        	
+	        	if (currLocation == null) {
+	        		
+	        		// No list value has been selected - do nothing
+	        		return;
+	        		
+	        	}
+	        	
+	        	if (MWTimeLapseLocationList.getLocation(currLocation) == null) {
+	        		
+	        		MWTimeLapseLocationList.addLocation(new Location(currLocation, MWTimeLapseService, MWTimeLapseLocationList));
+	        		
+	        	}
+	        	
+	        	createMonitor(MWTimeLapseLocationList.getLocation(currLocation), "temperature");
+	        	 
+	         }
+	      });
+	    
+	    //button for selecting Rainfall according to the list item that's been selected
+	    MWTimeLapseRainfallButton.addActionListener(new ActionListener() {
+	    
+	    	public void actionPerformed(ActionEvent e) {
+	        	 
+	        	String currLocation = MWTimeLapseList.getSelectedValue();
+	        	
+	        	if (currLocation == null) {
+	        		
+	        		// No list value has been selected - do nothing
+	        		return;
+	        		
+	        	}
+	        	
+	        	if (MWTimeLapseLocationList.getLocation(currLocation) == null) {
+	        		
+	        		MWTimeLapseLocationList.addLocation(new Location(currLocation, MWTimeLapseService, MWTimeLapseLocationList));
+	        		
+	        	}
+	        	
+	        	createMonitor(MWTimeLapseLocationList.getLocation(currLocation), "rainfall");
+	        	 
+	         }
+	    
+	    });
+	    
+	    // button for selecting temperature and rainfall according to the list item that's been selected
+	    MWTimeLapseTempRainButton.addActionListener(new ActionListener() {
+         public void actionPerformed(ActionEvent e) {
+        	 
+        	String currLocation = MWTimeLapseList.getSelectedValue();
+        	
+        	if (currLocation == null) {
+        		
+        		// No list value has been selected - do nothing
+        		return;
+        		
+        	}
+        	
+        	if (MWTimeLapseLocationList.getLocation(currLocation) == null) {
+        		
+        		MWTimeLapseLocationList.addLocation(new Location(currLocation, MWTimeLapseService, MWTimeLapseLocationList));
+        		
+        	}
+        	
+        	createMonitor(MWTimeLapseLocationList.getLocation(currLocation), "temperatureRainfall");
+        	 
+         }
+      });
         
 	    // Add all of the components to the panel
         MW2Panel.add(new JScrollPane(MW2List));
