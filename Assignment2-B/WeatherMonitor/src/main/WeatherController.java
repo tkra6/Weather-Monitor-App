@@ -84,12 +84,12 @@ public class WeatherController {
 	 * Handles the creation and display of the program's main GUI
 	 * @param location
 	 */
-	private void createAndShowUI(String[] location) {
+	private void createAndShowUI() {
 		JFrame mainFrame = new JFrame("Melbourne Weather Application");
 	    mainFrame.setLayout(new GridLayout(1, 1));
 	    mainFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
-        initComponents(mainFrame, location);
+        initComponents(mainFrame);
 
 	    mainFrame.pack();
 	    mainFrame.setLocationRelativeTo(null);
@@ -99,8 +99,11 @@ public class WeatherController {
 	/**
 	 * Initialises the components needed by the GUI for the specified JFrame and array of location strings
 	 */
-    private void initComponents(final JFrame frame, String[] locations) {
-
+    private void initComponents(final JFrame frame) {
+    	
+    	// Variable to hold the location list
+    	String[] locations;
+    	
     	// creates panel to group components together
     	JPanel baseLayoutPanel = new JPanel();
     	baseLayoutPanel.setLayout(new GridLayout(2, 1));
@@ -119,9 +122,15 @@ public class WeatherController {
 	    JButton MW2TempRainButton = new JButton("TemperatureRainfall");
 	    JButton MWTimeLapseTempRainButton = new JButton("TemperatureRainfall");
 	    
+	    // Populate the list for the MW2 Location List
+	    locations = this.MW2LocationList.getAllLocationsSorted();
+	    
 	    // creates a selectable list that has weather locations as it's data set
 	    final JList<String> MW2List = new JList<String>(locations);
 	    MW2List.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
+	    
+	    // Populate the list for the MWTimeLapse Location List
+	    locations = this.MWTimeLapseLocationList.getAllLocationsSorted();
 	    
 	    final JList<String> MWTimeLapseList = new JList<String>(locations);
 	    MWTimeLapseList.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
@@ -314,18 +323,26 @@ public class WeatherController {
 		WeatherController controller = new WeatherController();
 		System.out.println("Displaying GUI");
 		// Create and display the GUI for the application
-		controller.createAndShowUI(controller.MW2LocationList.getAllLocationsSorted());
+		controller.createAndShowUI();
 		
 		// This schedules the updateAllLocations function of the locationList to be run every 5 minutes
 		Timer timer = new Timer();
-		TimerTask updateTask = new TimerTask() {
+		TimerTask MW2updateTask = new TimerTask() {
 		    @Override
 		    public void run () {
 		        controller.MW2LocationList.updateAllLocations();
 		    }
 		};
+		TimerTask MWTimeLapseupdateTask = new TimerTask() {
+		    @Override
+		    public void run () {
+		        controller.MWTimeLapseLocationList.updateAllLocations();
+		    }
+		};
 		// schedule the task to run starting now and then every 5 minutes
-		timer.schedule(updateTask, 0l, 1000*60*5);
+		timer.schedule(MW2updateTask, 0l, 1000*60*5);
+		// schedule the task to run starting now and then every 20 seconds
+		timer.schedule(MWTimeLapseupdateTask, 0l, 1000*20);
 	}
 
 }

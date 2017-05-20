@@ -117,7 +117,7 @@ class TemperatureMonitor extends WeatherMonitor {
 			
 		} else {
 			
-			return ("Temperature is currently " + this.temperature.getData() + " degrees Celsius.");
+			return ("Temperature is currently " + this.convertToCelsius(this.temperature.getData(), this.temperature.getFormat()) + " degrees Celsius.");
 			
 		}
 		

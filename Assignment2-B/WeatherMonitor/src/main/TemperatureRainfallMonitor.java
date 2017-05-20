@@ -131,7 +131,7 @@ public class TemperatureRainfallMonitor extends WeatherMonitor {
 				
 			} else {
 				
-				return ("Temperature data is not currently available. Rainfall is currently " + this.rainfall.getData() + " milliletres");
+				return ("Temperature data is not currently available. Rainfall is currently " + this.convertToMM(this.rainfall.getData(), this.rainfall.getFormat()) + " milliletres");
 			}
 			
 		} else {
@@ -139,11 +139,11 @@ public class TemperatureRainfallMonitor extends WeatherMonitor {
 			if (this.rainfall == null || this.rainfall.getFormat() == "") {
 				
 				
-				return ("Termperature is " + this.temperature + " degrees Celsius. Rainfall data is not currently available");
+				return ("Termperature is " + this.convertToCelsius(this.temperature.getData(), this.temperature.getFormat()) + " degrees Celsius. Rainfall data is not currently available");
 			}
 			
-			return ("Temperature is currently " + this.temperature.getData() + " degrees Celsius. "
-					+ "Rainfall is currently " + this.rainfall.getData() + " milliletres");
+			return ("Temperature is currently " + this.convertToCelsius(this.temperature.getData(), this.temperature.getFormat()) + " degrees Celsius. "
+					+ "Rainfall is currently " + this.convertToMM(this.rainfall.getData(), this.rainfall.getFormat()) + " milliletres");
 		}
 	}
 }

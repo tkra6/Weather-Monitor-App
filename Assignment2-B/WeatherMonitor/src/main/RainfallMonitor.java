@@ -120,7 +120,7 @@ class RainfallMonitor extends WeatherMonitor {
 			
 		} else {
 			
-			return ("Rainfall is currently " + this.rainfall.getData() + " millilitres.");
+			return ("Rainfall is currently " + this.convertToMM(this.rainfall.getData(), this.rainfall.getFormat()) + " millimeters.");
 			
 		}
 		

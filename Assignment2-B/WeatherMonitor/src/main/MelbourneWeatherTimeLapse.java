@@ -67,7 +67,7 @@ public class MelbourneWeatherTimeLapse extends WeatherWebService {
 		String[] Weather = this.getWeatherForLocation(location);
 		
 		// Temperature data is at Weather[1]
-		return new String[] {Weather[1], "cm", Weather[0]};
+		return new String[] {Weather[1], "K", Weather[0]};
 
 	}
 	
