@@ -3,11 +3,30 @@ package main;
 import java.awt.GridLayout;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
+import java.text.SimpleDateFormat;
 import java.util.AbstractMap.SimpleEntry;
 import java.util.ArrayList;
 
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+
+import java.awt.Color;
+
+import org.jfree.chart.ChartFactory;
+import org.jfree.chart.ChartPanel;
+import org.jfree.chart.JFreeChart;
+import org.jfree.chart.axis.DateAxis;
+import org.jfree.chart.axis.NumberAxis;
+import org.jfree.chart.labels.StandardXYToolTipGenerator;
+import org.jfree.chart.plot.XYPlot;
+import org.jfree.chart.renderer.xy.StandardXYItemRenderer;
+import org.jfree.chart.renderer.xy.XYItemRenderer;
+import org.jfree.data.time.Month;
+import org.jfree.data.time.TimeSeries;
+import org.jfree.data.time.TimeSeriesCollection;
+import org.jfree.data.xy.XYDataset;
+import org.jfree.ui.ApplicationFrame;
+import org.jfree.ui.RefineryUtilities;
 
 /**
  * 
@@ -91,16 +110,45 @@ public class GraphicalTemperatureRainfallMonitor extends WeatherMonitor {
 		this.frame.setLayout(new GridLayout(0, 1));
 		// This ensures that closing this monitor will not shut down the application
 		this.frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-		
-		this.locationLabel = new JLabel();        
- 	   	this.locationLabel.setText("Location: " + this.getLocation());
- 	   	
- 	   	this.dataLabel = new JLabel();
- 	   	this.dataLabel.setText(this.getRenderContent());
-		
 		this.frame.setLocationRelativeTo(null);
-		this.frame.add(this.locationLabel);
- 	   	this.frame.add(this.dataLabel);
+		
+		// Creates instance of graph
+		XYDataset dataset = null; // DATA SET 1 GOES HERE
+		String chartTitle = "Temperature and Rainfall Over Time";
+		final JFreeChart chart = ChartFactory.createTimeSeriesChart(
+	            chartTitle, 
+	            "Time", 
+	            "Temperature (C)",
+	            dataset, // DATA SET 1
+	            true, 
+	            true, 
+	            false
+	        );
+		
+		final XYPlot plot = chart.getXYPlot();
+        final NumberAxis axis2 = new NumberAxis("Rainfall (mm)");
+        axis2.setAutoRangeIncludesZero(false);
+        
+        plot.setRangeAxis(1, axis2);
+        plot.setDataset(1, null); // DATA SET 2 GOES HERE INTO 2ND ARGUMENT
+        plot.mapDatasetToRangeAxis(1, 1);
+        
+        final XYItemRenderer renderer = plot.getRenderer();
+        renderer.setToolTipGenerator(StandardXYToolTipGenerator.getTimeSeriesInstance());
+        if (renderer instanceof StandardXYItemRenderer) {
+            final StandardXYItemRenderer rr = (StandardXYItemRenderer) renderer;
+            rr.setBaseShapesVisible(true);
+            rr.setShapesFilled(true);
+        }
+        
+        final DateAxis axis = (DateAxis) plot.getDomainAxis();
+        axis.setDateFormatOverride(new SimpleDateFormat("dd-MMM-yyyy-HH-MM-SS"));
+        
+        final ChartPanel chartPanel = new ChartPanel(chart);
+        chartPanel.setPreferredSize(new java.awt.Dimension(650, 400));
+        
+		
+	    this.frame.add(chartPanel);
  	   	this.frame.pack();
  	   	this.frame.setVisible(true);
 		

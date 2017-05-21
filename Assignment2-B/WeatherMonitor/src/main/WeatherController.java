@@ -75,6 +75,10 @@ public class WeatherController {
 		case "temperatureRainfall":
 			new GraphicalTemperatureRainfallMonitor(location);
 			break;
+			
+		case "graphTemperatureRainfall":
+			new GraphicalTemperatureRainfallMonitor(location);
+			break;
 		
 		}
 		
@@ -119,8 +123,12 @@ public class WeatherController {
 	    JButton MWTimeLapseTempButton = new JButton("Temperature"); 
 	    JButton MW2RainfallButton = new JButton("Rainfall");
 	    JButton MWTimeLapseRainfallButton = new JButton("Rainfall");
-	    JButton MW2TempRainButton = new JButton("TemperatureRainfall");
-	    JButton MWTimeLapseTempRainButton = new JButton("TemperatureRainfall");
+	    JButton MW2TempRainButton = new JButton("Temperature Rainfall");
+	    JButton MWTimeLapseTempRainButton = new JButton("Temperature Rainfall");
+	    JButton MWTimeLapseGraphTempButton = new JButton("Temperature Graph"); 
+	    JButton MWTimeLapseGraphRainfallButton = new JButton("Rainfall Graph");
+	    JButton MWTimeLapseGraphTempRainButton = new JButton("Temperature Rainfall Graph");
+
 	    
 	    // Populate the list for the MW2 Location List
 	    locations = this.MW2LocationList.getAllLocationsSorted();
@@ -300,6 +308,30 @@ public class WeatherController {
         	 
          }
       });
+	    
+	 // button for selecting temperature and rainfall graphs according to the list item that's been selected
+	    MWTimeLapseGraphTempRainButton.addActionListener(new ActionListener() {
+         public void actionPerformed(ActionEvent e) {
+        	 
+        	String currLocation = MWTimeLapseList.getSelectedValue();
+        	
+        	if (currLocation == null) {
+        		
+        		// No list value has been selected - do nothing
+        		return;
+        		
+        	}
+        	
+        	if (MWTimeLapseLocationList.getLocation(currLocation) == null) {
+        		
+        		MWTimeLapseLocationList.addLocation(new Location(currLocation, MWTimeLapseService, MWTimeLapseLocationList));
+        		
+        	}
+        	
+        	createMonitor(MWTimeLapseLocationList.getLocation(currLocation), "graphTemperatureRainfall");
+        	 
+         }
+      });
         
 	    // Add all of the components to the panel
         MW2Panel.add(new JScrollPane(MW2List));
@@ -310,6 +342,9 @@ public class WeatherController {
 	    MWTimeLapsePanel.add(MWTimeLapseRainfallButton, BorderLayout.SOUTH);
 	    MW2Panel.add(MW2TempRainButton, BorderLayout.SOUTH);
 	    MWTimeLapsePanel.add(MWTimeLapseTempRainButton, BorderLayout.SOUTH);
+	    MWTimeLapsePanel.add(MWTimeLapseGraphTempButton, BorderLayout.SOUTH);
+	    MWTimeLapsePanel.add(MWTimeLapseGraphRainfallButton, BorderLayout.SOUTH);
+	    MWTimeLapsePanel.add(MWTimeLapseGraphTempRainButton, BorderLayout.SOUTH);
 	    baseLayoutPanel.add(MW2Panel);
 	    baseLayoutPanel.add(MWTimeLapsePanel);
 	    frame.add(baseLayoutPanel);

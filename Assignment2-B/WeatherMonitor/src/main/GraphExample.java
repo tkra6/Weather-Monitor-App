@@ -113,7 +113,7 @@ public class GraphExample extends ApplicationFrame {
         plot.setRenderer(1, renderer2);
         
         final DateAxis axis = (DateAxis) plot.getDomainAxis();
-        axis.setDateFormatOverride(new SimpleDateFormat("MMM-yyyy"));
+        axis.setDateFormatOverride(new SimpleDateFormat("dd-MMM-yyyy-HH-MM-SS"));
         
         final ChartPanel chartPanel = new ChartPanel(chart);
         chartPanel.setPreferredSize(new java.awt.Dimension(500, 270));
