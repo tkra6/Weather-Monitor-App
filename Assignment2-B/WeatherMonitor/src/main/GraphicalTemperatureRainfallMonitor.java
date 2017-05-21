@@ -1,17 +1,21 @@
 package main;
 
 import java.awt.GridLayout;
-import java.awt.event.*;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
+import java.util.AbstractMap.SimpleEntry;
+import java.util.ArrayList;
 
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 
 /**
- * @author Tom, Doug
- * Monitor that listens to and displays temperature data for a location
+ * 
+ * @author douglas
+ * A graphical monitor that displays and stores information about both Temperature and Rainfall
+ *
  */
-
-class TemperatureMonitor extends WeatherMonitor {
+public class GraphicalTemperatureRainfallMonitor extends WeatherMonitor {
 	
 	// References to the display and labels of the monitor
 	private JFrame frame;
@@ -20,10 +24,18 @@ class TemperatureMonitor extends WeatherMonitor {
 	// References to what the Monitor is storing
 	private Location location;
 	private WeatherData temperature;
-
-	public TemperatureMonitor(Location subject) {
+	private WeatherData rainfall;
+	
+	private ArrayList<SimpleEntry<String, Float>> historicalTemperature;
+	private ArrayList<SimpleEntry<String, Float>> historicalRainfall;
+	
+	
+	public GraphicalTemperatureRainfallMonitor(Location subject) {
 		
-		this.requiredData = new DataType[]{DataType.temperature};
+		historicalTemperature = new ArrayList<SimpleEntry<String, Float>>();
+		historicalRainfall = new ArrayList<SimpleEntry<String, Float>>();
+		
+		this.requiredData = new DataType[]{DataType.temperature, DataType.rainfall};
 		this.location = subject;
 		this.location.attach(this);
 	    this.update();
@@ -37,15 +49,31 @@ class TemperatureMonitor extends WeatherMonitor {
 	public void update() {
 		
 		this.temperature = this.location.getState(DataType.temperature);
-
+		this.rainfall = this.location.getState(DataType.rainfall);
+		
+		// Add the new data to the historical arrays
+		this.historicalTemperature.add(new SimpleEntry<String, Float>(this.temperature.getTimestamp(), this.temperature.getData()));
+		this.historicalRainfall.add(new SimpleEntry<String, Float>(this.rainfall.getTimestamp(), this.rainfall.getData()));
+		
 		this.displayWindow();
 		
+		for (SimpleEntry<String, Float> entry : this.historicalTemperature) {
+			
+			System.out.println(entry.getKey() + " : " + entry.getValue());
+			
+		}
+		System.out.println(" done ");
 	}
 	
 	public float getTemperature() {
 		
 		return this.convertToCelsius(this.temperature.getData(), this.temperature.getFormat());
 		
+	}
+	
+	public float getRainfall() {
+		
+		return this.convertToMM(this.rainfall.getData(), this.rainfall.getFormat());
 	}
 	
 	public String getLocation() {
@@ -86,7 +114,7 @@ class TemperatureMonitor extends WeatherMonitor {
  	   	});
 		
 	}
-	
+
 	/**
 	 * Creates the window if it isn't already created, otherwise updates it with the current value of getRenderContent()
 	 */
@@ -111,16 +139,28 @@ class TemperatureMonitor extends WeatherMonitor {
 	 */
 	private String getRenderContent() {
 		
-		if (this.temperature == null || this.temperature.getFormat() == null) {
+		if (this.temperature == null || this.temperature.getFormat() == "") {
 			
-			return ("Temperature data is not currently available.");
+			if (this.rainfall == null || this.rainfall.getFormat() == "") {
+				
+				return ("Temperature and rainfall data is not currently available");
+				
+			} else {
+				
+				return ("Temperature data is not currently available. Rainfall is currently " + this.getRainfall() + " milliletres");
+			}
 			
 		} else {
 			
-			return ("Temperature is currently " + this.getTemperature() + " degrees Celsius.");
+			if (this.rainfall == null || this.rainfall.getFormat() == "") {
+				
+				
+				return ("Termperature is " + this.getTemperature() + " degrees Celsius. Rainfall data is not currently available");
+			}
 			
+			return ("Temperature is currently " + this.getTemperature() + " degrees Celsius. "
+					+ "Rainfall is currently " + this.getRainfall() + " milliletres");
 		}
-		
 	}
 
 }

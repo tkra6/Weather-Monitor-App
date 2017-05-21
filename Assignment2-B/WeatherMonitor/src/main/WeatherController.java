@@ -73,7 +73,7 @@ public class WeatherController {
 			break;
 			
 		case "temperatureRainfall":
-			new TemperatureRainfallMonitor(location);
+			new GraphicalTemperatureRainfallMonitor(location);
 			break;
 		
 		}

@@ -45,10 +45,9 @@ class RainfallMonitor extends WeatherMonitor {
 
 	}
 	
-	public String getRainfall() {
+	public float getRainfall() {
 		
-		return String.valueOf(this.rainfall);
-		
+		return this.convertToMM(this.rainfall.getData(), this.rainfall.getFormat());
 	}
 	
 	public String getLocation() {
@@ -120,7 +119,7 @@ class RainfallMonitor extends WeatherMonitor {
 			
 		} else {
 			
-			return ("Rainfall is currently " + this.convertToMM(this.rainfall.getData(), this.rainfall.getFormat()) + " millimeters.");
+			return ("Rainfall is currently " + this.getRainfall() + " milliletres");
 			
 		}
 		
