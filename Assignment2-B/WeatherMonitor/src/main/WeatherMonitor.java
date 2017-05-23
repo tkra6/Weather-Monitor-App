@@ -23,7 +23,7 @@ public abstract class WeatherMonitor extends Observer {
 		if (format == "K") {
 			value = (float) (value - 273.15);
 		} else if (format != "C") {
-			System.out.println("Unknown format.");
+			System.out.println("Unknown format: " + format);
 			return value;
 		}
 		
@@ -37,7 +37,7 @@ public abstract class WeatherMonitor extends Observer {
 		if (format == "cm") {
 			value = (float) (value * 10);
 		} else if (format != "mm") {
-			System.out.println("Unknown format.");
+			System.out.println("Unknown format: " + format);
 			return value;
 		}
 		

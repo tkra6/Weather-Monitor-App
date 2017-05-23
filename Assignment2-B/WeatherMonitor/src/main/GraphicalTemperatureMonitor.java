@@ -5,40 +5,30 @@ import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.util.AbstractMap.SimpleEntry;
-import java.util.ArrayList;
 
 import javax.swing.JFrame;
 import javax.swing.JLabel;
-
-import java.awt.Color;
-import java.awt.Container;
 
 import org.jfree.chart.ChartFactory;
 import org.jfree.chart.ChartPanel;
 import org.jfree.chart.JFreeChart;
 import org.jfree.chart.axis.DateAxis;
-import org.jfree.chart.axis.NumberAxis;
 import org.jfree.chart.labels.StandardXYToolTipGenerator;
 import org.jfree.chart.plot.XYPlot;
 import org.jfree.chart.renderer.xy.StandardXYItemRenderer;
 import org.jfree.chart.renderer.xy.XYItemRenderer;
 import org.jfree.data.time.Minute;
-import org.jfree.data.time.Month;
-import org.jfree.data.time.Second;
 import org.jfree.data.time.TimeSeries;
 import org.jfree.data.time.TimeSeriesCollection;
 import org.jfree.data.xy.XYDataset;
-import org.jfree.ui.ApplicationFrame;
-import org.jfree.ui.RefineryUtilities;
 
 /**
  * 
  * @author douglas
- * A graphical monitor that displays and stores information about both Temperature and Rainfall
+ * A graphical monitor that displays and stores information about Temperature
  *
  */
-public class GraphicalTemperatureRainfallMonitor extends WeatherMonitor {
+public class GraphicalTemperatureMonitor extends WeatherMonitor {
 	
 	// References to the display and labels of the monitor
 	private JFrame frame;
@@ -47,21 +37,18 @@ public class GraphicalTemperatureRainfallMonitor extends WeatherMonitor {
 	// References to what the Monitor is storing
 	private Location location;
 	private WeatherData temperature;
-	private WeatherData rainfall;
 	
 	private SimpleDateFormat dateTimeFormat;
 	private final TimeSeries temperatureSeries;
-	private final TimeSeries rainfallSeries;
 	
 	
-	public GraphicalTemperatureRainfallMonitor(Location subject) {
+	public GraphicalTemperatureMonitor(Location subject) {
 		
 		this.dateTimeFormat = new SimpleDateFormat("dd/MM/yyyy HH:mm:SS");
 		
 		this.temperatureSeries = new TimeSeries("Temperature", Minute.class);
-		this.rainfallSeries = new TimeSeries("Rainfall", Minute.class);
 		
-		this.requiredData = new DataType[]{DataType.temperature, DataType.rainfall};
+		this.requiredData = new DataType[]{DataType.temperature};
 		this.location = subject;
 		this.location.attach(this);
 	    this.update();
@@ -75,12 +62,10 @@ public class GraphicalTemperatureRainfallMonitor extends WeatherMonitor {
 	public void update() {
 		
 		this.temperature = this.location.getState(DataType.temperature);
-		this.rainfall = this.location.getState(DataType.rainfall);
 		
 		try {
 			// Add the new data to the data sets
 			this.temperatureSeries.addOrUpdate(new Minute(this.dateTimeFormat.parse(this.temperature.getTimestamp())), this.getTemperature());
-			this.rainfallSeries.addOrUpdate(new Minute(this.dateTimeFormat.parse(this.rainfall.getTimestamp())), this.getRainfall());
 		} catch (ParseException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -95,24 +80,9 @@ public class GraphicalTemperatureRainfallMonitor extends WeatherMonitor {
 		
 	}
 	
-	public float getRainfall() {
-		
-		return this.convertToMM(this.rainfall.getData(), this.rainfall.getFormat());
-		
-	}
-	
 	public String getLocation() {
 		
 		return this.location.getLocation();
-		
-	}
-	
-	public XYDataset createRainfallDataSet() throws ParseException {
-
-        final TimeSeriesCollection dataset = new TimeSeriesCollection();
-        dataset.addSeries(this.rainfallSeries);
-
-        return dataset;
 		
 	}
 	
@@ -145,7 +115,7 @@ public class GraphicalTemperatureRainfallMonitor extends WeatherMonitor {
 			e.printStackTrace();
 			return;
 		}
-		String chartTitle = this.getLocation() + " - Temperature and Rainfall Over Time";
+		String chartTitle = this.getLocation() + " - Temperature Over Time";
 		final JFreeChart chart = ChartFactory.createTimeSeriesChart(
 	            chartTitle, 
 	            "Time", 
@@ -157,16 +127,7 @@ public class GraphicalTemperatureRainfallMonitor extends WeatherMonitor {
 	        );
 		
 		final XYPlot plot = chart.getXYPlot();
-        final NumberAxis axis2 = new NumberAxis("Rainfall (mm)");
-        axis2.setAutoRangeIncludesZero(false);
-        plot.getRenderer().setSeriesPaint(0, Color.BLUE);
-        plot.setRangeAxis(1, axis2);
-        try {
-			plot.setDataset(1, this.createRainfallDataSet());
-		} catch (ParseException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
+		
         plot.mapDatasetToRangeAxis(1, 1);
         
         final XYItemRenderer renderer = plot.getRenderer();
@@ -222,28 +183,16 @@ public class GraphicalTemperatureRainfallMonitor extends WeatherMonitor {
 	 */
 	private String getRenderContent() {
 		
-		if (this.temperature == null || this.temperature.getFormat() == "") {
+		if (this.temperature == null || this.temperature.getFormat() == null) {
 			
-			if (this.rainfall == null || this.rainfall.getFormat() == "") {
-				
-				return ("Temperature and rainfall data is not currently available");
-				
-			} else {
-				
-				return ("Temperature data is not currently available. Rainfall is currently " + this.getRainfall() + " milliletres");
-			}
+			return ("Temperature data is not currently available.");
 			
 		} else {
 			
-			if (this.rainfall == null || this.rainfall.getFormat() == "") {
-				
-				
-				return ("Termperature is " + this.getTemperature() + " degrees Celsius. Rainfall data is not currently available");
-			}
+			return ("Temperature is currently " + this.getTemperature() + " degrees Celsius.");
 			
-			return ("Temperature is currently " + this.getTemperature() + " degrees Celsius. "
-					+ "Rainfall is currently " + this.getRainfall() + " milliletres");
 		}
+		
 	}
 
 }

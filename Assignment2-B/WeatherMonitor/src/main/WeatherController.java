@@ -73,7 +73,15 @@ public class WeatherController {
 			break;
 			
 		case "temperatureRainfall":
-			new GraphicalTemperatureRainfallMonitor(location);
+			new GraphicalTemperatureMonitor(location);
+			break;
+			
+		case "graphTemperature":
+			new GraphicalTemperatureMonitor(location);
+			break;
+			
+		case "graphRainfall":
+			new GraphicalRainfallMonitor(location);
 			break;
 			
 		case "graphTemperatureRainfall":
@@ -305,6 +313,54 @@ public class WeatherController {
         	}
         	
         	createMonitor(MWTimeLapseLocationList.getLocation(currLocation), "temperatureRainfall");
+        	 
+         }
+      });
+	   
+	 // button for selecting temperature and rainfall graphs according to the list item that's been selected
+	    MWTimeLapseGraphTempButton.addActionListener(new ActionListener() {
+         public void actionPerformed(ActionEvent e) {
+        	 
+        	String currLocation = MWTimeLapseList.getSelectedValue();
+        	
+        	if (currLocation == null) {
+        		
+        		// No list value has been selected - do nothing
+        		return;
+        		
+        	}
+        	
+        	if (MWTimeLapseLocationList.getLocation(currLocation) == null) {
+        		
+        		MWTimeLapseLocationList.addLocation(new Location(currLocation, MWTimeLapseService, MWTimeLapseLocationList));
+        		
+        	}
+        	
+        	createMonitor(MWTimeLapseLocationList.getLocation(currLocation), "graphTemperature");
+        	 
+         }
+      });
+	    
+	 // button for selecting temperature and rainfall graphs according to the list item that's been selected
+	    MWTimeLapseGraphRainfallButton.addActionListener(new ActionListener() {
+         public void actionPerformed(ActionEvent e) {
+        	 
+        	String currLocation = MWTimeLapseList.getSelectedValue();
+        	
+        	if (currLocation == null) {
+        		
+        		// No list value has been selected - do nothing
+        		return;
+        		
+        	}
+        	
+        	if (MWTimeLapseLocationList.getLocation(currLocation) == null) {
+        		
+        		MWTimeLapseLocationList.addLocation(new Location(currLocation, MWTimeLapseService, MWTimeLapseLocationList));
+        		
+        	}
+        	
+        	createMonitor(MWTimeLapseLocationList.getLocation(currLocation), "graphRainfall");
         	 
          }
       });
