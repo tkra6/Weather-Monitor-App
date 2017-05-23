@@ -4,7 +4,7 @@
   <element>
     <id>UMLActor</id>
     <coordinates>
-      <x>130</x>
+      <x>150</x>
       <y>50</y>
       <w>60</w>
       <h>110</h>
@@ -15,7 +15,7 @@
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>150</x>
+      <x>170</x>
       <y>140</y>
       <w>30</w>
       <h>360</h>
@@ -26,7 +26,7 @@
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>150</x>
+      <x>170</x>
       <y>160</y>
       <w>310</w>
       <h>40</h>
@@ -38,7 +38,7 @@ createMonitor(location, type)</panel_attributes>
   <element>
     <id>UMLNote</id>
     <coordinates>
-      <x>10</x>
+      <x>30</x>
       <y>190</y>
       <w>140</w>
       <h>70</h>
@@ -52,7 +52,7 @@ the controller</panel_attributes>
   <element>
     <id>UMLGeneric</id>
     <coordinates>
-      <x>380</x>
+      <x>400</x>
       <y>100</y>
       <w>150</w>
       <h>30</h>
@@ -63,7 +63,7 @@ the controller</panel_attributes>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>440</x>
+      <x>460</x>
       <y>120</y>
       <w>30</w>
       <h>40</h>
@@ -74,7 +74,7 @@ the controller</panel_attributes>
   <element>
     <id>UMLGeneric</id>
     <coordinates>
-      <x>440</x>
+      <x>460</x>
       <y>140</y>
       <w>20</w>
       <h>320</h>
@@ -85,7 +85,7 @@ the controller</panel_attributes>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>450</x>
+      <x>470</x>
       <y>180</y>
       <w>220</w>
       <h>40</h>
@@ -97,7 +97,7 @@ create(location)</panel_attributes>
   <element>
     <id>UMLGeneric</id>
     <coordinates>
-      <x>590</x>
+      <x>610</x>
       <y>100</y>
       <w>150</w>
       <h>30</h>
@@ -108,7 +108,7 @@ create(location)</panel_attributes>
   <element>
     <id>UMLGeneric</id>
     <coordinates>
-      <x>650</x>
+      <x>670</x>
       <y>200</y>
       <w>20</w>
       <h>240</h>
@@ -119,7 +119,7 @@ create(location)</panel_attributes>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>650</x>
+      <x>670</x>
       <y>120</y>
       <w>30</w>
       <h>100</h>
@@ -130,7 +130,7 @@ create(location)</panel_attributes>
   <element>
     <id>UMLNote</id>
     <coordinates>
-      <x>560</x>
+      <x>580</x>
       <y>0</y>
       <w>210</w>
       <h>90</h>
@@ -145,7 +145,7 @@ passed to WeatherController</panel_attributes>
   <element>
     <id>UMLGeneric</id>
     <coordinates>
-      <x>800</x>
+      <x>820</x>
       <y>100</y>
       <w>150</w>
       <h>30</h>
@@ -156,7 +156,7 @@ passed to WeatherController</panel_attributes>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>860</x>
+      <x>880</x>
       <y>120</y>
       <w>30</w>
       <h>120</h>
@@ -167,7 +167,7 @@ passed to WeatherController</panel_attributes>
   <element>
     <id>UMLGeneric</id>
     <coordinates>
-      <x>860</x>
+      <x>880</x>
       <y>220</y>
       <w>20</w>
       <h>140</h>
@@ -178,7 +178,7 @@ passed to WeatherController</panel_attributes>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>660</x>
+      <x>680</x>
       <y>220</y>
       <w>220</w>
       <h>40</h>
@@ -190,7 +190,7 @@ attach(this)</panel_attributes>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>660</x>
+      <x>680</x>
       <y>290</y>
       <w>220</w>
       <h>40</h>
@@ -202,7 +202,7 @@ getState(requiredData)</panel_attributes>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>660</x>
+      <x>680</x>
       <y>370</y>
       <w>180</w>
       <h>70</h>
@@ -214,7 +214,7 @@ displayWindow()</panel_attributes>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>860</x>
+      <x>880</x>
       <y>350</y>
       <w>30</w>
       <h>150</h>
@@ -225,7 +225,7 @@ displayWindow()</panel_attributes>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>650</x>
+      <x>670</x>
       <y>430</y>
       <w>30</w>
       <h>70</h>
@@ -236,7 +236,7 @@ displayWindow()</panel_attributes>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>440</x>
+      <x>460</x>
       <y>450</y>
       <w>30</w>
       <h>50</h>
@@ -247,7 +247,7 @@ displayWindow()</panel_attributes>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>660</x>
+      <x>680</x>
       <y>320</y>
       <w>220</w>
       <h>40</h>
