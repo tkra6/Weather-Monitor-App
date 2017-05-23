@@ -133,8 +133,11 @@ public class WeatherController {
 	    JButton MWTimeLapseRainfallButton = new JButton("Rainfall");
 	    JButton MW2TempRainButton = new JButton("Temperature Rainfall");
 	    JButton MWTimeLapseTempRainButton = new JButton("Temperature Rainfall");
-	    JButton MWTimeLapseGraphTempButton = new JButton("Temperature Graph"); 
+	    JButton MW2GraphTempButton = new JButton("Temperature Graph"); 
+	    JButton MWTimeLapseGraphTempButton = new JButton("Temperature Graph");
+	    JButton MW2GraphRainfallButton = new JButton("Rainfall Graph"); 
 	    JButton MWTimeLapseGraphRainfallButton = new JButton("Rainfall Graph");
+	    JButton MW2GraphTempRainButton = new JButton("Temperature Rainfall Graph");
 	    JButton MWTimeLapseGraphTempRainButton = new JButton("Temperature Rainfall Graph");
 
 	    
@@ -230,6 +233,78 @@ public class WeatherController {
         	}
         	
         	createMonitor(MW2LocationList.getLocation(currLocation), "temperatureRainfall");
+        	 
+         }
+      });
+	    
+	 // button for selecting temperature and rainfall graphs according to the list item that's been selected
+	    MW2GraphTempButton.addActionListener(new ActionListener() {
+         public void actionPerformed(ActionEvent e) {
+        	 
+        	String currLocation = MW2List.getSelectedValue();
+        	
+        	if (currLocation == null) {
+        		
+        		// No list value has been selected - do nothing
+        		return;
+        		
+        	}
+        	
+        	if (MW2LocationList.getLocation(currLocation) == null) {
+        		
+        		MW2LocationList.addLocation(new Location(currLocation, MW2Service, MW2LocationList));
+        		
+        	}
+        	
+        	createMonitor(MW2LocationList.getLocation(currLocation), "graphTemperature");
+        	 
+         }
+      });
+	    
+	 // button for selecting rainfall graph according to the list item that's been selected
+	    MW2GraphRainfallButton.addActionListener(new ActionListener() {
+         public void actionPerformed(ActionEvent e) {
+        	 
+        	 String currLocation = MW2List.getSelectedValue();
+         	
+         	if (currLocation == null) {
+         		
+         		// No list value has been selected - do nothing
+         		return;
+         		
+         	}
+         	
+         	if (MW2LocationList.getLocation(currLocation) == null) {
+         		
+         		MW2LocationList.addLocation(new Location(currLocation, MW2Service, MW2LocationList));
+         		
+         	}
+         	
+         	createMonitor(MW2LocationList.getLocation(currLocation), "graphRainfall");
+         	 
+          }
+      });
+	    
+	 // button for selecting temperature graphs according to the list item that's been selected
+	    MW2GraphTempRainButton.addActionListener(new ActionListener() {
+         public void actionPerformed(ActionEvent e) {
+        	 
+        	String currLocation = MW2List.getSelectedValue();
+        	
+        	if (currLocation == null) {
+        		
+        		// No list value has been selected - do nothing
+        		return;
+        		
+        	}
+        	
+        	if (MW2LocationList.getLocation(currLocation) == null) {
+        		
+        		MW2LocationList.addLocation(new Location(currLocation, MW2Service, MW2LocationList));
+        		
+        	}
+        	
+        	createMonitor(MW2LocationList.getLocation(currLocation), "graphTemperatureRainfall");
         	 
          }
       });
@@ -341,7 +416,7 @@ public class WeatherController {
          }
       });
 	    
-	 // button for selecting temperature and rainfall graphs according to the list item that's been selected
+	 // button for selecting rainfall graph according to the list item that's been selected
 	    MWTimeLapseGraphRainfallButton.addActionListener(new ActionListener() {
          public void actionPerformed(ActionEvent e) {
         	 
@@ -365,7 +440,7 @@ public class WeatherController {
          }
       });
 	    
-	 // button for selecting temperature and rainfall graphs according to the list item that's been selected
+	 // button for selecting temperature graphs according to the list item that's been selected
 	    MWTimeLapseGraphTempRainButton.addActionListener(new ActionListener() {
          public void actionPerformed(ActionEvent e) {
         	 
@@ -398,8 +473,11 @@ public class WeatherController {
 	    MWTimeLapsePanel.add(MWTimeLapseRainfallButton, BorderLayout.SOUTH);
 	    MW2Panel.add(MW2TempRainButton, BorderLayout.SOUTH);
 	    MWTimeLapsePanel.add(MWTimeLapseTempRainButton, BorderLayout.SOUTH);
+	    MW2Panel.add(MW2GraphTempButton, BorderLayout.SOUTH);
 	    MWTimeLapsePanel.add(MWTimeLapseGraphTempButton, BorderLayout.SOUTH);
+	    MW2Panel.add(MW2GraphRainfallButton, BorderLayout.SOUTH);
 	    MWTimeLapsePanel.add(MWTimeLapseGraphRainfallButton, BorderLayout.SOUTH);
+	    MW2Panel.add(MW2GraphTempRainButton, BorderLayout.SOUTH);
 	    MWTimeLapsePanel.add(MWTimeLapseGraphTempRainButton, BorderLayout.SOUTH);
 	    baseLayoutPanel.add(MW2Panel);
 	    baseLayoutPanel.add(MWTimeLapsePanel);
