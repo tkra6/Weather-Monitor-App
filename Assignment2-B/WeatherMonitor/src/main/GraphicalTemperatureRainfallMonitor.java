@@ -3,6 +3,7 @@ package main;
 import java.awt.GridLayout;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.AbstractMap.SimpleEntry;
 import java.util.ArrayList;
@@ -21,7 +22,9 @@ import org.jfree.chart.labels.StandardXYToolTipGenerator;
 import org.jfree.chart.plot.XYPlot;
 import org.jfree.chart.renderer.xy.StandardXYItemRenderer;
 import org.jfree.chart.renderer.xy.XYItemRenderer;
+import org.jfree.data.time.Minute;
 import org.jfree.data.time.Month;
+import org.jfree.data.time.Second;
 import org.jfree.data.time.TimeSeries;
 import org.jfree.data.time.TimeSeriesCollection;
 import org.jfree.data.xy.XYDataset;
@@ -48,8 +51,12 @@ public class GraphicalTemperatureRainfallMonitor extends WeatherMonitor {
 	private ArrayList<SimpleEntry<String, Float>> historicalTemperature;
 	private ArrayList<SimpleEntry<String, Float>> historicalRainfall;
 	
+	private SimpleDateFormat dateTimeFormat;
+	
 	
 	public GraphicalTemperatureRainfallMonitor(Location subject) {
+		
+		this.dateTimeFormat = new SimpleDateFormat("dd/MM/yyyy HH:mm:SS");
 		
 		historicalTemperature = new ArrayList<SimpleEntry<String, Float>>();
 		historicalRainfall = new ArrayList<SimpleEntry<String, Float>>();
@@ -101,6 +108,32 @@ public class GraphicalTemperatureRainfallMonitor extends WeatherMonitor {
 		
 	}
 	
+	public XYDataset createRainfallDataSet() throws ParseException {
+		
+		final TimeSeries s2 = new TimeSeries("Random Data 2", Minute.class);
+        s2.add(new Minute(this.dateTimeFormat.parse("23/05/2017 12:53:31")), 10);
+        s2.add(new Minute(this.dateTimeFormat.parse("25/05/2017 12:53:31")), 50);
+
+        final TimeSeriesCollection dataset = new TimeSeriesCollection();
+        dataset.addSeries(s2);
+
+        return dataset;
+		
+	}
+	
+	public XYDataset createTemperatureDataSet() throws ParseException {
+		
+		final TimeSeries s2 = new TimeSeries("Temperature", Minute.class);
+        s2.add(new Minute(this.dateTimeFormat.parse("23/05/2017 12:53:31")), 10);
+        s2.add(new Minute(this.dateTimeFormat.parse("25/05/2017 12:53:31")), 50);
+
+        final TimeSeriesCollection dataset = new TimeSeriesCollection();
+        dataset.addSeries(s2);
+
+        return dataset;
+		
+	}
+	
 	/**
 	 * Handles the initial creation of the window
 	 */
@@ -113,7 +146,14 @@ public class GraphicalTemperatureRainfallMonitor extends WeatherMonitor {
 		this.frame.setLocationRelativeTo(null);
 		
 		// Creates instance of graph
-		XYDataset dataset = null; // DATA SET 1 GOES HERE
+		XYDataset dataset;
+		try {
+			dataset = createTemperatureDataSet();
+		} catch (ParseException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			return;
+		} // DATA SET 1 GOES HERE
 		String chartTitle = "Temperature and Rainfall Over Time";
 		final JFreeChart chart = ChartFactory.createTimeSeriesChart(
 	            chartTitle, 
@@ -142,7 +182,7 @@ public class GraphicalTemperatureRainfallMonitor extends WeatherMonitor {
         }
         
         final DateAxis axis = (DateAxis) plot.getDomainAxis();
-        axis.setDateFormatOverride(new SimpleDateFormat("dd-MMM-yyyy-HH-MM-SS"));
+        axis.setDateFormatOverride(this.dateTimeFormat);
         
         final ChartPanel chartPanel = new ChartPanel(chart);
         chartPanel.setPreferredSize(new java.awt.Dimension(650, 400));
@@ -174,7 +214,7 @@ public class GraphicalTemperatureRainfallMonitor extends WeatherMonitor {
 			
 		} else {
 			
-			this.dataLabel.setText(this.getRenderContent());
+			// TODO: Update the graph
 			frame.pack();
 			
 		}
