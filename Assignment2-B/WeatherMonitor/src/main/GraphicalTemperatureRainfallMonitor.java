@@ -12,6 +12,7 @@ import javax.swing.JFrame;
 import javax.swing.JLabel;
 
 import java.awt.Color;
+import java.awt.Container;
 
 import org.jfree.chart.ChartFactory;
 import org.jfree.chart.ChartPanel;
@@ -48,18 +49,17 @@ public class GraphicalTemperatureRainfallMonitor extends WeatherMonitor {
 	private WeatherData temperature;
 	private WeatherData rainfall;
 	
-	private ArrayList<SimpleEntry<String, Float>> historicalTemperature;
-	private ArrayList<SimpleEntry<String, Float>> historicalRainfall;
-	
 	private SimpleDateFormat dateTimeFormat;
+	private final TimeSeries temperatureSeries;
+	private final TimeSeries rainfallSeries;
 	
 	
 	public GraphicalTemperatureRainfallMonitor(Location subject) {
 		
 		this.dateTimeFormat = new SimpleDateFormat("dd/MM/yyyy HH:mm:SS");
 		
-		historicalTemperature = new ArrayList<SimpleEntry<String, Float>>();
-		historicalRainfall = new ArrayList<SimpleEntry<String, Float>>();
+		this.temperatureSeries = new TimeSeries("Temperature", Minute.class);
+		this.rainfallSeries = new TimeSeries("Rainfall", Minute.class);
 		
 		this.requiredData = new DataType[]{DataType.temperature, DataType.rainfall};
 		this.location = subject;
@@ -77,18 +77,16 @@ public class GraphicalTemperatureRainfallMonitor extends WeatherMonitor {
 		this.temperature = this.location.getState(DataType.temperature);
 		this.rainfall = this.location.getState(DataType.rainfall);
 		
-		// Add the new data to the historical arrays
-		this.historicalTemperature.add(new SimpleEntry<String, Float>(this.temperature.getTimestamp(), this.temperature.getData()));
-		this.historicalRainfall.add(new SimpleEntry<String, Float>(this.rainfall.getTimestamp(), this.rainfall.getData()));
+		try {
+			// Add the new data to the data sets
+			this.temperatureSeries.add(new Minute(this.dateTimeFormat.parse(this.temperature.getTimestamp())), this.getTemperature());
+			this.rainfallSeries.add(new Minute(this.dateTimeFormat.parse(this.rainfall.getTimestamp())), this.getRainfall());
+		} catch (ParseException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		
 		this.displayWindow();
-		
-		for (SimpleEntry<String, Float> entry : this.historicalTemperature) {
-			
-			System.out.println(entry.getKey() + " : " + entry.getValue());
-			
-		}
-		System.out.println(" done ");
 	}
 	
 	public float getTemperature() {
@@ -100,6 +98,7 @@ public class GraphicalTemperatureRainfallMonitor extends WeatherMonitor {
 	public float getRainfall() {
 		
 		return this.convertToMM(this.rainfall.getData(), this.rainfall.getFormat());
+		
 	}
 	
 	public String getLocation() {
@@ -109,27 +108,19 @@ public class GraphicalTemperatureRainfallMonitor extends WeatherMonitor {
 	}
 	
 	public XYDataset createRainfallDataSet() throws ParseException {
-		
-		final TimeSeries s2 = new TimeSeries("Random Data 2", Minute.class);
-        s2.add(new Minute(this.dateTimeFormat.parse("23/05/2017 12:53:31")), 10);
-        s2.add(new Minute(this.dateTimeFormat.parse("25/05/2017 12:53:31")), 50);
 
         final TimeSeriesCollection dataset = new TimeSeriesCollection();
-        dataset.addSeries(s2);
+        dataset.addSeries(this.rainfallSeries);
 
         return dataset;
 		
 	}
 	
 	public XYDataset createTemperatureDataSet() throws ParseException {
-		
-		final TimeSeries s2 = new TimeSeries("Temperature", Minute.class);
-        s2.add(new Minute(this.dateTimeFormat.parse("23/05/2017 12:53:31")), 10);
-        s2.add(new Minute(this.dateTimeFormat.parse("25/05/2017 12:53:31")), 50);
-
+        
         final TimeSeriesCollection dataset = new TimeSeriesCollection();
-        dataset.addSeries(s2);
-
+        dataset.addSeries(this.temperatureSeries);
+        
         return dataset;
 		
 	}
@@ -153,7 +144,7 @@ public class GraphicalTemperatureRainfallMonitor extends WeatherMonitor {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 			return;
-		} // DATA SET 1 GOES HERE
+		}
 		String chartTitle = "Temperature and Rainfall Over Time";
 		final JFreeChart chart = ChartFactory.createTimeSeriesChart(
 	            chartTitle, 
@@ -170,7 +161,12 @@ public class GraphicalTemperatureRainfallMonitor extends WeatherMonitor {
         axis2.setAutoRangeIncludesZero(false);
         
         plot.setRangeAxis(1, axis2);
-        plot.setDataset(1, null); // DATA SET 2 GOES HERE INTO 2ND ARGUMENT
+        try {
+			plot.setDataset(1, this.createRainfallDataSet());
+		} catch (ParseException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
         plot.mapDatasetToRangeAxis(1, 1);
         
         final XYItemRenderer renderer = plot.getRenderer();
